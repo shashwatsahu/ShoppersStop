@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryText">
+
+<android.support.v7.widget.Toolbar
+    android:id="@+id/search_toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:fitsSystemWindows="true"
+    android:minHeight="?attr/actionBarSize"
+    android:elevation="4dp"
+    android:background="@color/colorPrimary"
+    android:statusBarColor="@color/colorPrimaryDark"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:popupTheme="@style/AppTheme"
+            android:layout_alignParentStart="true"
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <android.support.v7.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/spinner" />
+
+
+
+
+    </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_product"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:fitsSystemWindows="true"
+            android:minHeight="?attr/actionBarSize"
+            android:elevation="1dp"
+            android:background="@color/colorPrimary">
+
+                <Spinner
+                    android:id="@+id/spinner_department"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:layout_alignParentStart="true"
+                    android:paddingTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/spinner_price"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_alignParentStart="true"
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/spinner_brand"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:popupTheme="@style/AppTheme"
+            android:layout_alignParentStart="true"
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Spinner
+            android:id="@+id/spinner_weight"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:layout_alignParentStart="true"
+            android:paddingTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        </android.support.v7.widget.Toolbar>
+
+    <ListView
+    android:id="@+id/list"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"/>
+</LinearLayout>

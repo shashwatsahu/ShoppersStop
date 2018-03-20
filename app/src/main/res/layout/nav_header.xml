@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout
+    android:id="@+id/nav_header"
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:background="@color/colorPrimary"
+    android:padding="16dp">
+
+    <ImageView
+        android:contentDescription="@string/profile"
+        android:id="@+id/user_profile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:src="@mipmap/ic_launcher"/>
+
+    <TextView
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:id="@+id/name_id"
+        android:textSize="22sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/header"
+        android:layout_toEndOf="@id/user_profile"
+        android:textColor="@color/colorPrimaryText"
+        android:layout_above="@id/email_id"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
+
+    <TextView
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:id="@+id/email_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/user_profile"
+        android:text="@string/email"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
+
+    <ListView
+        android:id="@+id/list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="@color/ListPrimary"
+        android:divider="@color/colorPrimaryText"
+        android:dividerHeight="1dp"/>
+
+</LinearLayout>

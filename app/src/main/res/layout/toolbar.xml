@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:fitsSystemWindows="true"
+    android:minHeight="?attr/actionBarSize"
+    android:elevation="4dp"
+    android:background="@color/colorPrimary"
+    android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+    android:statusBarColor="@color/colorPrimaryDark"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal">
+
+    <ImageButton
+        android:id="@+id/nav_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/drawer"
+        android:gravity="center_horizontal"
+        android:paddingTop="8dp"
+        android:layout_alignParentStart="true"
+        android:background="@color/Transparent"
+        android:src="@drawable/ic_menu_white_24dp"/>
+
+    <ImageButton
+        android:id="@+id/input_list"
+        android:contentDescription="@string/make_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:paddingTop="8dp"
+        android:paddingEnd="8dp"
+        android:paddingStart="8dp"
+        android:onClick="getInputList"
+        android:layout_toStartOf="@id/search_button"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_pencil"/>
+
+       <ImageButton
+           android:id="@+id/search_button"
+           android:paddingTop="8dp"
+           android:contentDescription="@string/action_websearch"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:gravity="center_horizontal"
+           android:paddingStart="8dp"
+           android:paddingEnd="8dp"
+           android:src="@drawable/ic_action_search"
+           android:layout_toStartOf="@id/message_id"
+           android:background="@color/Transparent"/>
+
+    <ImageButton
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingStart="8dp"
+        android:contentDescription="@string/unread_message"
+        android:id="@+id/message_id"
+        android:layout_width="wrap_content"
+        android:layout_alignStart="@id/message_id"
+        android:gravity="center_horizontal"
+        android:layout_height="wrap_content"
+        android:background="@color/Transparent"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_action_unread"/>
+
+</RelativeLayout>
+</android.support.v7.widget.Toolbar>

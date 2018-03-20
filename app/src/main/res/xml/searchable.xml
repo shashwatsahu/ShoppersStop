@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<searchable
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:label="@string/app_label"
+    android:hint="@string/search_hint"
+    android:searchSuggestAuthority="com.example.hp.shoppersstop"
+    android:searchSuggestIntentAction="android.intent.action.VIEW"
+    android:searchSuggestSelection="SUGGEST_COLUMN_TEXT_1 LIKE ?"
+    android:searchMode="queryRewriteFromData"
+    android:includeInGlobalSearch="true"
+    android:searchSuggestThreshold="0"
+    android:searchSettingsDescription="@string/search_description"
+    android:searchSuggestIntentData="content://com.example.hp.shoppersstop/product_grocery">
+
+</searchable>

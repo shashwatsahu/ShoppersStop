@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimaryText"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_list"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:fitsSystemWindows="true"
+        android:theme="@style/AppTheme"
+        app:popupTheme="@style/AppTheme"
+        android:statusBarColor="@color/colorPrimaryDark">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <ImageButton
+            android:id="@+id/submit_btn"
+            android:onClick="getInputList"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/make_list"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_check"/>
+
+        <ImageButton
+            android:id="@+id/check_list_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_receipt_white_32dp"
+            android:background="@android:color/transparent"
+            android:paddingTop="8dp"
+            android:contentDescription="@string/check_list"
+            android:layout_toStartOf="@id/submit_btn"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+   <LinearLayout
+       android:orientation="horizontal"
+       android:layout_width="match_parent"
+       android:padding="16dp"
+       android:layout_height="wrap_content">
+
+       <TextView
+           android:id="@+id/nam_txt"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/name"
+           android:fontFamily="sans-serif"
+           android:paddingEnd="35dp"
+           android:paddingStart="16dp"
+           android:textSize="16sp"
+           android:textColor="@color/colorPrimaryDarkText"/>
+
+       <EditText
+           android:id="@+id/nam_edt"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textColor="@color/colorPrimaryDarkText"
+           android:inputType="text"
+           android:labelFor="@id/nam_edt"/>
+
+   </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/wt_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="28dp"
+            android:paddingStart="16dp"
+            android:text="@string/weight"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDarkText"/>
+
+        <EditText
+            android:id="@+id/wt_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:inputType="phone|numberDecimal"
+            android:labelFor="@id/wt_edt"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/prc_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="40dp"
+            android:paddingStart="16dp"
+            android:fontFamily="sans-serif"
+            android:text="@string/price"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDarkText"/>
+
+        <EditText
+            android:id="@+id/prc_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:inputType="phone|numberDecimal"
+            android:labelFor="@id/prc_edt"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/quant_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="18dp"
+            android:paddingStart="16dp"
+            android:text="@string/quantity"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDarkText"/>
+
+        <EditText
+            android:id="@+id/quant_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:inputType="phone|number"
+            android:labelFor="@id/quant_edt"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/brnd_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="35dp"
+            android:paddingStart="16dp"
+            android:text="@string/brand"
+            android:fontFamily="sans-serif"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDarkText"/>
+
+        <EditText
+            android:id="@+id/brnd_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:inputType="text"
+            android:labelFor="@id/brnd_edt"/>
+
+    </LinearLayout>
+
+</LinearLayout>

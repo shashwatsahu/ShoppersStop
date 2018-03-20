@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="4dp"
+    android:paddingStart="2dp"
+    android:paddingEnd="2dp"
+    xmlns:tool="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:elevation="4dp"
+        android:layout_gravity="center"
+        app:cardCornerRadius="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/shop_img_id"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="10dp"
+                android:src="@mipmap/ic_launcher_round"
+                android:contentDescription="@string/list_image" />
+
+                <RelativeLayout
+                    android:id="@+id/child1"
+                    android:layout_toEndOf="@id/shop_img_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/shop_name_txt_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingStart="16dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        style="@style/Base.TextAppearance.AppCompat.Title"
+                        android:layout_alignParentTop="true"
+                        android:textSize="20sp"
+                        android:fontFamily="sans-serif"
+                        android:singleLine="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/rating_id"
+                        android:textColor="@color/colorPrimaryDarkText"
+                        tool:text="AmulShop"/>
+
+                    <TextView
+                        android:id="@+id/shop_address_txt_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/shop_name_txt_id"
+                        android:textSize="16sp"
+                        style="@style/Base.TextAppearance.AppCompat.Display1"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:singleLine="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@id/rating_id"
+                        android:fontFamily="sans-serif"
+                        tool:text="Amul Shop Address"/>
+
+                <ImageView
+                    android:contentDescription="@string/green_mark"
+                    android:id="@+id/shop_status_id"
+                    android:paddingTop="4dp"
+                    android:paddingStart="8dp"
+                    android:paddingEnd="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_green_mark"/>
+
+                <TextView
+                    android:id="@+id/rating_id"
+                    android:background="@drawable/ic_checkbox_blank_circle"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    style="@style/Base.TextAppearance.AppCompat.Title"
+                    android:singleLine="true"
+                    android:gravity="center"
+                    android:layout_toStartOf="@id/shop_status_id"
+                    tool:text="4.0"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</FrameLayout>

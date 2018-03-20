@@ -1,0 +1,107 @@
+<resources>
+    <string name="app_name">ShopStore</string>
+    <string name="drawer_open">drawer open</string>
+    <string name="drawer_close">drawer close</string>
+    <string name="action_websearch">action web search</string>
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">com.example.hp.shoppersstop</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fbcom.example.hp.shoppersstop</string>
+
+    <string name="app_not_available">App not available</string>
+    <string name="header">Header</string>
+    <string name="drawer">Drawer</string>
+    <string name="unread_message">Unread Message</string>
+    <string name="search_hint">Search product</string>
+    <string name="app_label">Shop-E</string>
+    <string name="email">email@email.com</string>
+    <string name="profile">profile</string>
+    <string name="list_image">list image</string>
+    <string name="make_list">make list</string>
+    <string name="check_list">Check</string>
+    <string name="back">back</string>
+    <string name="name">Name</string>
+    <string name="brand">Brand</string>
+    <string name="quantity">Quantity</string>
+    <string name="price">Price</string>
+    <string name="weight">Weight</string>
+    <string name="list_send">list send</string>
+
+    <string-array name="spinner_list">
+        <item>Product</item>
+        <item>Shop</item>
+    </string-array>
+
+    <string-array name="navigation_list">
+
+        <item>Home</item>
+        <item>Shop by Category</item>
+
+        <item>Notifications</item>
+        <item>Offer Zone</item>
+
+        <item>My Rewards</item>
+        <item>My Cart</item>
+        <item>My Wish List</item>
+        <item>My Orders</item>
+        <item>My Account</item>
+
+        <item>Send feedback</item>
+        <item>Help Centre</item>
+        <item>Legal</item>
+    </string-array>
+
+    <string-array name="product_list_department">
+        <item>bakery</item>
+        <item>clothes</item>
+        <item>cosmetics</item>
+        <item>electronic</item>
+        <item>grocery</item>
+        <item>medical</item>
+        <item>shoes</item>
+        <item>sports</item>
+        <item>stationary</item>
+        <item>utensils</item>
+        <item>vegetables</item>
+    </string-array>
+
+    <string-array name="product_list_price">
+        <item>Minimum</item>
+        <item>Maximum</item>
+    </string-array>
+
+   <string-array name="bakery">
+       <item>amul</item>
+       <item>patanjali</item>
+   </string-array>
+
+    <string-array name="grocery">
+        <item>cadbury</item>
+        <item>kisan</item>
+        <item>nescafe</item>
+        <item>patanjali</item>
+    </string-array>
+
+
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="enter_list">Enter List</string>
+    <string name="product_list">Product Lists</string>
+    <string name="filter">filter</string>
+    <string name="select_all">select all</string>
+    <string name="shop_category">Shops Category</string>
+    <string name="green_mark">green mark</string>
+    <string name="shopList">Shops List</string>
+    <string name="search_description">search product/shop</string>
+</resources>
