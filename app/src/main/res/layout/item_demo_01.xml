@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     android:background="@drawable/statelist_item_background">
 
-    <include layout="@layout/list_item"/>
+    <include layout="@layout/list_layout"/>
 
 </RelativeLayout>
