@@ -8,11 +8,6 @@
     android:orientation="vertical"
     tools:context=".EditProfile">
 
-
-
-
-
-
     <EditText
         android:id="@+id/first_name"
         android:layout_width="match_parent"

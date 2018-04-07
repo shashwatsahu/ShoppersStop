@@ -183,13 +183,17 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                         startActivity(new Intent(MainActivity.this, PendingOrderActivity.class));
                         break;
                     case 8:
-                        startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                        startActivity(new Intent(MainActivity.this, Customer_Profile_Main_Page.class));
                         break;
                     case 9:
+                        startActivity(new Intent(MainActivity.this, ImproveUsActivity.class));
                         break;
                     case 10:
+                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         break;
                     case 11:
+                        startActivity(new Intent(MainActivity.this, TermsAndConditions.class));
+
                         break;
                     case 12:
 
@@ -378,7 +382,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         arrayList.add(new DrawerList("My Orders", null));
         arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_36dp)));
         arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
-        arrayList.add(new DrawerList("Help Centre", getDrawable(R.drawable.ic_help)));
+        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
         arrayList.add(new DrawerList("Legal", null));
         arrayList.add(new DrawerList("Log Out",null));
 

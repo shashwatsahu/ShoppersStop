@@ -71,6 +71,11 @@
 
         <activity android:name=".FavouriteListActivity" />
         <activity android:name=".SendSelectedList"></activity>
+        <activity android:name=".Customer_Profile_Main_Page" />
+        <activity android:name=".TermsAndConditions" />
+        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".ImproveUsActivity" />
     </application>
 
 </manifest>
