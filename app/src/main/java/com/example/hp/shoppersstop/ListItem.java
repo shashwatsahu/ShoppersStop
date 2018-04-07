@@ -8,9 +8,13 @@ import java.util.Map;
  */
 
 public class ListItem {
+
+    public static int nextId = 0;
+
     private String name, brand;
     private int quantity;
     private double price, weight;
+    public int id = ++nextId;
 
     public ListItem() {
 
@@ -54,4 +58,25 @@ public class ListItem {
 
         return result;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
+
 }

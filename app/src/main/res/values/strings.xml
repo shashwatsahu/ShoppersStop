@@ -69,10 +69,10 @@
         <item>Maximum</item>
     </string-array>
 
-   <string-array name="bakery">
-       <item>amul</item>
-       <item>patanjali</item>
-   </string-array>
+    <string-array name="bakery">
+        <item>amul</item>
+        <item>patanjali</item>
+    </string-array>
 
     <string-array name="grocery">
         <item>cadbury</item>
@@ -104,4 +104,37 @@
     <string name="green_mark">green mark</string>
     <string name="shopList">Shops List</string>
     <string name="search_description">search product/shop</string>
+    <string name="action_remove">remove</string>
+    <string name="account_profile_picture">account profile picture</string>
+    <string name="edit_button">edit button</string>
+    <string name="action_select">select</string>
+    <string name="selected_counts">%d Selected</string>
+
+
+    <string name="edit_profile">Edit profile</string>
+    <string name="share_win">Share and Win</string>
+    <string name="coupons">My Coupons</string>
+    <string name="help_and_support">Help and Support</string>
+    <string name="about_us">About Us</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="imporve_us">Improve Us</string>
+    <string name="log_out">Logout</string>
+    <string name="save_btn">Save</string>
+    <string name="first_name_hint">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="send_suggestion">SEND</string>
+    <string name="your_suggestion_here">Your suggestion here&#8230;</string>
+    <string name="information_name">This name will be used while sending list to a shop or while chatting with a shopkeeper.This
+    is not a username.</string>
+    <string name="heading_text">WalkOver</string>
+    <string name="paragraph_text">Walkover brings an all new way for shopping from your nearby stores  now you don\'t need to
+    search for a product by going to each and every shop instead you can just tap to Walkover application,type in product name
+        and you will get suggestion of where you can find the product.\nIt gives you an option to send virtual list of items to shopkeeper and can get the order after it's ready.
+        You can query for the availability of a product by using the chat facility.\nWalkover will bring you the ease which will transform the
+        way you do shopping from local shops.\nAn interconnection of local shops you will get the information on your smart phone screens.
+    </string>
+
+    <string name="warning_for_name_edit">Name must not contain numbers or special characters (1&#8211;9,.,*,-,_,+,#,@..etc)</string>
+
+    <string name="suggestion_heading">Have some suggestions in your mind?</string>
 </resources>

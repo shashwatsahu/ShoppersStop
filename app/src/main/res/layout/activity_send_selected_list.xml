@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.hp.shoppersstop.SendSelectedList">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/list_selection_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
+        android:minHeight="?attr/actionBarSize"
+        android:elevation="4dp"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:statusBarColor="@color/colorPrimaryDark"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:paddingEnd="16dp"
+                android:paddingTop="8dp"
+                android:paddingStart="8dp"
+                android:contentDescription="@string/unread_message"
+                android:id="@+id/message_id"
+                android:layout_width="wrap_content"
+                android:layout_alignStart="@id/message_id"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:background="@color/Transparent"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_send"/>
+
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/vendor_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>
