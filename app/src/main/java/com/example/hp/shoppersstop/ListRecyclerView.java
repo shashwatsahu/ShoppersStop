@@ -1,6 +1,7 @@
 package com.example.hp.shoppersstop;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -93,8 +94,7 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
 
             switch (item.getItemId()) {
                 case R.id.action_select:
-
-                    Toast.makeText(ListRecyclerView.this, "Select", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(ListRecyclerView.this, SendSelectedList.class));
                     return true;
                 case R.id.action_remove:
                     List<Integer> selectedItemPositions = getSelectedItems();

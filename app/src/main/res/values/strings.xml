@@ -137,4 +137,26 @@
     <string name="warning_for_name_edit">Name must not contain numbers or special characters (1&#8211;9,.,*,-,_,+,#,@..etc)</string>
 
     <string name="suggestion_heading">Have some suggestions in your mind?</string>
+
+
+
+    <string name="need_location_permission">Location permission Required</string>
+    <string name="go_to_settings">Go to Settings</string>
+    <string name="allow_location_access">Allow location access</string>
+    <string name="why_location_is_required">For better results and filtering location is needed please allow access to
+            device location Go to Settings->Permission->enable location</string>
+
+
+    <string name= "shop_distance">%1$s miles away</string>
+    <string name="search">Search</string>
+    <string name="map_view">Map View</string>
+
+    <string name="userName">Default name</string>
+    <string name="phone">Phone</string>
+    <string name="defaultPhone">+91-58838829</string>
+    <string name="defaultEmail">xyzuser@xyz.com</string>
+    <string name="call_shop">Call?</string>
+    <string name="call_text">CALL</string>
+    <string name="cancel_text">CANCEL</string>
+    <string name="sendlist">Send List</string>
 </resources>

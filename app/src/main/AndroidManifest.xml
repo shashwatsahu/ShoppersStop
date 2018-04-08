@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
+
         android:icon="@mipmap/ss_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ss_launcher"
@@ -70,7 +70,10 @@
             android:exported="false" />
 
         <activity android:name=".FavouriteListActivity" />
-        <activity android:name=".SendSelectedList"></activity>
+        <activity android:name=".SendSelectedList"
+                    android:parentActivityName=".ListRecyclerView"
+                    android:theme="@style/AppTheme"/>
+
         <activity android:name=".Customer_Profile_Main_Page" />
         <activity android:name=".TermsAndConditions" />
         <activity android:name=".AboutUsActivity" />

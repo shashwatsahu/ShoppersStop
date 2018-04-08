@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.hp.shoppersstop.SendSelectedList">
+    tools:context="com.example.hp.shoppersstop.ShopsActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/list_selection_toolbar"
@@ -44,6 +44,8 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/vendor_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:scrollbars="vertical"
+        tools:listitem="@layout/shop_card_view"/>
 
 </LinearLayout>

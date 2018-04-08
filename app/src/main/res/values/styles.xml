@@ -28,8 +28,11 @@
             <item name="colorAccent">@color/colorAccent</item>
         </style>-->
 
-
-
     </style>
+        <style name="RatingBarTheme" parent="Theme.AppCompat">
+
+            <item name="colorControlNormal">@color/colorGrey</item>
+            <item name="colorControlActivated">@color/color_for_star</item>
+        </style>
 
 </resources>

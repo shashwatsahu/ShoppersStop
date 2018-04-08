@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:padding="@dimen/layout_padding"
+    android:layout_margin="6dp"
+    >
+
+
+    <View
+        android:id="@+id/image_placeHolder"
+        android:layout_width="@dimen/placeholder_image"
+        android:layout_height="@dimen/placeholder_image"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="@color/placeholder_bg"/>
+
+    <View
+        android:id="@+id/shopName_placeholder"
+        android:layout_width="180dp"
+        android:layout_height="@dimen/shopName_text"
+        android:background="@color/placeholder_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="6dp"
+        android:layout_toRightOf="@+id/image_placeHolder"/>
+
+    <View
+        android:id="@+id/distance_placeholder"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/shopDistance_text"
+        android:layout_toRightOf="@id/image_placeHolder"
+        android:layout_below="@id/shopName_placeholder"
+        android:background="@color/placeholder_bg"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="8dp"/>
+
+
+    <View
+        android:id="@+id/rating_ph"
+        android:layout_width="160dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/distance_placeholder"
+        android:layout_toRightOf="@id/image_placeHolder"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/placeholder_bg"
+        />
+
+
+    <View
+        android:layout_width="140dp"
+        android:layout_height="35dp"
+        android:layout_below="@id/rating_ph"
+        android:layout_toRightOf="@+id/image_placeHolder"
+        android:layout_marginLeft="10dp"
+        android:background="@color/placeholder_bg"
+        android:layout_marginTop="20dp"
+        />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</RelativeLayout>

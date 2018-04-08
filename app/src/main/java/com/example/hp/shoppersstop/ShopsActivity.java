@@ -51,7 +51,7 @@ public class ShopsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
 
         Query query = FirebaseDatabase.getInstance().getReference().child("shopstore").child("seller")
-                                              .child(shopCategoryName).child("sellerId");
+                                              .child(shopCategoryName).child("userID");
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ShopListItem, ShopListViewHolder>(ShopListItem.class, R.layout.shop_card_view
         , ShopListViewHolder.class, query) {
@@ -60,7 +60,7 @@ public class ShopsActivity extends AppCompatActivity {
 
                     if(model != null) {
 
-                    viewHolder.name.setText(model.getName());
+                    viewHolder.name.setText(model.getShopName());
                     viewHolder.address.setText(model.getAddress());
                     viewHolder.rating.setText(String.valueOf(model.getRating()));
                     Toast.makeText(ShopsActivity.this, "Name:" + model.getName(), Toast.LENGTH_SHORT).show();

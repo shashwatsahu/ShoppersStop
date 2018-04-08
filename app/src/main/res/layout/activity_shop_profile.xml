@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".Shop_full_profile">
+
+
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="218dp"
+        android:theme="@style/AppTheme">
+        
+        
+        <android.support.design.widget.CollapsingToolbarLayout
+
+            android:id="@+id/toolBar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            app:contentScrim="@color/profileDetailsTextColor"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
+
+
+
+            <ImageView
+                android:id="@+id/shop_display_full"
+                android:layout_width="match_parent"
+                android:layout_height="290dp"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_launcher_foreground"
+                app:layout_collapseMode="parallax"
+                app:layout_collapseParallaxMultiplier="0.7" />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/shop_name_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                android:layout_weight="1"
+                app:titleTextColor="@color/smallTextColor"
+                app:layout_scrollFlags= "scroll|exitUntilCollapsed"
+                android:background="?attr/colorPrimary"
+                android:minHeight="?attr/actionBarSize"
+                android:theme="?attr/popupTheme" />
+
+        </android.support.design.widget.CollapsingToolbarLayout>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <include layout="@layout/shop_keeper_info"/>
+
+
+</android.support.design.widget.CoordinatorLayout>
