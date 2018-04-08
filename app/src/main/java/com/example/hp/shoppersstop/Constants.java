@@ -11,4 +11,9 @@ public class Constants {
     public static final String QUANTITY_KEY ="quantity";
     public static final String WEIGHT_KEY = "weight";
     public static final String SHOP_KEY = "shop";
+
+    public static String KEY_ID = "key_id";
+
+    public static String NAME_INNER_CONTAINER = "innerContainer";
+
 }

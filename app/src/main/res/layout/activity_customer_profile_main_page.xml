@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:id="@+id/profile_info_layout"
+            android:background="@color/common_background">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:id="@+id/profilePhoto"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical|center_horizontal"
+                    android:background="@drawable/border_for_profile_photo"
+                    android:src="@drawable/ic_android_logo"
+                    app:civ_border_color="#4fc3f7"
+
+                    android:layout_centerHorizontal="true"
+                    app:civ_border_width="2dp" />
+
+                <TextView
+                    android:id="@+id/customer_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profilePhoto"
+                    android:layout_centerHorizontal="true"
+                    android:fontFamily="sans-serif"
+                    android:text="Customer Name"
+                    android:textSize="20sp"
+                    android:textColor="@color/text_color_for_profile_top"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/customer_mail_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="2dp"
+                    android:layout_below="@+id/customer_name"
+                    android:text="user123@gmail.com"
+                    android:textStyle="normal"
+                    android:textColor="@color/text_color_for_profile_top"
+                    android:fontFamily="sans-serif"
+                    android:textSize="15sp"/>
+        </RelativeLayout>
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="100dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@+id/profile_info_layout">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@color/grey_background">
+
+
+
+
+                    <include layout="@layout/edit_profile_card_view_layout"/>
+                    <include layout="@layout/share_and_win_card_view_layout"/>
+                    <include layout="@layout/my_coupons_card_view_layout"/>
+                    <include layout="@layout/help_and_support_card_view_layout"/>
+                    <include layout="@layout/about_us_card_view_layout"/>
+                    <include layout="@layout/terms_of_service_card_view_layout"/>
+                    <include layout="@layout/improve_us_card_view_layout"/>
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="@string/log_out"
+                        android:textSize="15sp"
+                        android:textColor="@color/text_color_for_profile_top"
+                        android:background="@color/common_background"
+
+                        />
+
+
+                </LinearLayout>
+
+        </ScrollView>
+
+
+</RelativeLayout>

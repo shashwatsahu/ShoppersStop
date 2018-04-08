@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:orderInCategory="10"
+
+    <item android:orderInCategory="10"
+        android:title="@string/action_select"
+        android:id="@+id/action_select"
+        android:icon="@drawable/ic_check"
+        app:showAsAction="ifRoom" />
+
+    <item android:orderInCategory="10"
        android:title="@string/action_remove"
-       android:id="@+id/menu_delete"
+       android:id="@+id/action_remove"
        android:icon="@drawable/ic_action_discard"
        app:showAsAction="ifRoom" />
 </menu>
