@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hp.shoppersstop.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,6 +32,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import UserViewHolder.example.hp.shoppersstop.ShopListItem;
 
 public class SendSelectedList extends AppCompatActivity implements View.OnClickListener
         , RecyclerView.OnItemTouchListener{

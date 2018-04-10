@@ -12,7 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.hp.shoppersstop.R;
+import com.example.hp.shoppersstop.UserViewHolder;
+
 import java.util.ArrayList;
+
 
 /**
  * Created by hp on 10-02-2018.

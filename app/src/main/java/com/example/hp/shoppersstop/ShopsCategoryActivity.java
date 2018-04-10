@@ -8,6 +8,8 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import com.example.hp.shoppersstop.R;
+
 import java.util.ArrayList;
 
 public class ShopsCategoryActivity extends AppCompatActivity {

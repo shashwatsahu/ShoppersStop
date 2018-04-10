@@ -1,4 +1,4 @@
-package com.example.hp.shoppersstop.database;
+package UserViewHolder.example.hp.shoppersstop.database;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -35,11 +35,11 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     private SQLiteDatabase mDataBase;
     private static String DB_PATH = "";
-    private static final String SQL_DELETE_ENTRIES = "DROP TABLE " + TABLE_NAME;
+    private static final String SQL_DELETE_ENTRIES = "DROP TABLE " + ProductContract.ProductEntry.TABLE_NAME;
 
    public ProductDbHelper(Context context) {
 
-    super(context , ProductEntry.Database_Name,null, DATABASE_VERSION);
+    super(context , ProductContract.ProductEntry.Database_Name,null, DATABASE_VERSION);
 
            DB_PATH = context.getApplicationInfo().dataDir + "/databases/";
         Log.i(TAG, "path:" + context.getApplicationInfo().dataDir);
@@ -55,7 +55,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public void updateDataBase() throws IOException {
         if (mNeedUpdate) {
-            File dbFile = new File(DB_PATH + ProductEntry.Database_Name);
+            File dbFile = new File(DB_PATH + ProductContract.ProductEntry.Database_Name);
             if (dbFile.exists())
                 dbFile.delete();
 
@@ -70,7 +70,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     }
 
     private boolean checkDataBase() {
-        File dbFile = new File(DB_PATH +ProductEntry.Database_Name);
+        File dbFile = new File(DB_PATH + ProductContract.ProductEntry.Database_Name);
         return dbFile.exists();
     }
 
@@ -88,7 +88,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public void openDatabase() {
 
-       String path = mContext.getDatabasePath(ProductEntry.Database_Name).getPath();
+       String path = mContext.getDatabasePath(ProductContract.ProductEntry.Database_Name).getPath();
 
        if(mDataBase != null && mDataBase.isOpen()) {
            return;
@@ -128,11 +128,11 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
 
-        queryBuilder.setTables(TABLE_NAME);
+        queryBuilder.setTables(ProductContract.ProductEntry.TABLE_NAME);
 
         Cursor c = queryBuilder.query(this.getReadableDatabase(),
-                new String[] { "_id", ProductEntry.PRODUCT_NAME } ,
-                ProductEntry.PRODUCT_NAME + " = ?", new String[] { id } , null, null, null ,null
+                new String[] { "_id", ProductContract.ProductEntry.PRODUCT_NAME } ,
+                ProductContract.ProductEntry.PRODUCT_NAME + " = ?", new String[] { id } , null, null, null ,null
         );
 
         return c;
@@ -140,7 +140,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
 
     public Cursor getProducts(String[] selectionArgs){
 
-        String selection = ProductEntry.PRODUCT_NAME + " like ? ";
+        String selection = ProductContract.ProductEntry.PRODUCT_NAME + " like ? ";
 
         if(selectionArgs!=null){
             selectionArgs[0] = "%"+selectionArgs[0] + "%";
@@ -149,10 +149,10 @@ public class ProductDbHelper extends SQLiteOpenHelper {
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
        // queryBuilder.setProjectionMap(mAliasMap);
 
-        queryBuilder.setTables(TABLE_NAME);
+        queryBuilder.setTables(ProductContract.ProductEntry.TABLE_NAME);
 
         Cursor c = queryBuilder.query(this.getReadableDatabase(),
-                new String[] { "_id", ProductEntry.PRODUCT_NAME} ,
+                new String[] { "_id", ProductContract.ProductEntry.PRODUCT_NAME} ,
                 selection,
                 selectionArgs,
                 null,
@@ -163,8 +163,8 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     }
 
     private void copyDBFile() throws IOException {
-        InputStream mInput = mContext.getAssets().open(ProductEntry.Database_Name);
-        OutputStream mOutput = new FileOutputStream(DB_PATH + ProductEntry.Database_Name);
+        InputStream mInput = mContext.getAssets().open(ProductContract.ProductEntry.Database_Name);
+        OutputStream mOutput = new FileOutputStream(DB_PATH + ProductContract.ProductEntry.Database_Name);
         byte[] mBuffer = new byte[1024];
         int mLength;
         while ((mLength = mInput.read(mBuffer)) > 0)
@@ -175,7 +175,7 @@ public class ProductDbHelper extends SQLiteOpenHelper {
     }
 
     public boolean openDataBase() throws SQLException {
-        mDataBase = SQLiteDatabase.openDatabase(DB_PATH + ProductEntry.Database_Name, null, SQLiteDatabase.OPEN_READONLY);
+        mDataBase = SQLiteDatabase.openDatabase(DB_PATH + ProductContract.ProductEntry.Database_Name, null, SQLiteDatabase.OPEN_READONLY);
         return mDataBase != null;
     }
 

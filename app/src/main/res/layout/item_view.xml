@@ -7,23 +7,28 @@
     android:layout_margin="6dp"
     android:padding="8dp">
 
+
+
         <ImageView
             android:id="@+id/shopDisplay"
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
-            app:srcCompat="@mipmap/ic_launcher_round"/>
+            app:srcCompat="@mipmap/ic_launcher_round"
+            android:layout_alignParentLeft="true"/>
+
+
+
 
         <TextView
             android:id="@+id/shopName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
+            android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/shopDisplay"
-            android:text="Shop Name "
             android:textColor="@color/textColor"
+            android:text="Shop Name "
             android:textSize="28sp" />
 
 
@@ -31,28 +36,28 @@
         android:id="@+id/shop_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/shopDisplay"
         android:layout_below="@id/shopName"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/shopDisplay"
-        android:text="0.6 miles away"
-        android:textColor="@color/textColor"
         android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:text="0.6 miles away"
         />
 
     <RatingBar
         android:id="@+id/ratings"
-        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/shop_distance"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="10dp"
+        android:theme="@style/RatingBarTheme"
+        style="@style/Widget.AppCompat.RatingBar.Indicator"
         android:layout_toRightOf="@id/shopDisplay"
-        android:isIndicator="true"
+        android:layout_below="@id/shop_distance"
+        android:layout_marginStart="10dp"
         android:numStars="5"
         android:rating="3"
         android:stepSize="0.5"
-        android:theme="@style/RatingBarTheme"
+        android:layout_marginLeft="8dp"
+        android:isIndicator="true"
         />
 
 
@@ -63,28 +68,32 @@
             android:id="@+id/actionLinearLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:layout_below="@id/ratings"
-            android:layout_marginLeft="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="20dp"
             android:layout_toRightOf="@id/shopDisplay"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/shop_action_drawable"
-            android:orientation="horizontal">
+
+            >
 
             <ImageButton
                 android:id="@+id/call_shop"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/shop_action_buttons"
                 android:layout_height="@dimen/shop_action_buttons"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
+                android:src="@drawable/ic_phone_receiver"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/ic_phone_receiver"/>
+
+                />
 
 
             <ImageButton
                 android:id="@+id/chat_shop"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/shop_action_buttons"
                 android:layout_height="@dimen/shop_action_buttons"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_chat"
                 />
@@ -92,11 +101,26 @@
 
             <ImageButton
                 android:id="@+id/view_shop_profile"
-                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="@dimen/shop_action_buttons"
                 android:layout_height="@dimen/shop_action_buttons"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/ic_customer_service"/>
 
+
+
         </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </RelativeLayout>

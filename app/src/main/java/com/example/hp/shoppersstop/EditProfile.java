@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.hp.shoppersstop.R;
+
 public class EditProfile extends AppCompatActivity {
 
     EditText first_name;

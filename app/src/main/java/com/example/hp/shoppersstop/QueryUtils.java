@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.util.SparseArray;
 
+import com.example.hp.shoppersstop.UserViewHolder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,7 +54,7 @@ public class QueryUtils extends Application {
 
         final ArrayList<ListItem> itemArrayList = new ArrayList<>();
 
-         mDatabase.child("shopstore").child("customer").child(uid).child("productList").addValueEventListener(new ValueEventListener() {
+         mDatabase.child("shopstore").child("customer").child(EnterList.uid).child("productList").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 

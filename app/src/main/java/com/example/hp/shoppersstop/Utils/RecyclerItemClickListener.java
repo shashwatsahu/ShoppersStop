@@ -1,4 +1,4 @@
-package com.example.hp.shoppersstop.Utils;
+package UserViewHolder.example.hp.shoppersstop.Utils;
 
 import android.content.Context;
 import android.support.design.widget.TabLayout;

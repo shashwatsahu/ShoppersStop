@@ -1,4 +1,4 @@
-package com.example.hp.shoppersstop;
+package UserViewHolder.example.hp.shoppersstop;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

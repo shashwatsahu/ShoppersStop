@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_marginTop="@dimen/horizontal_margin"
+
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/horizontal_margin"
+        android:orientation="vertical"
+       >
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/shop_contact_card_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/horizontal_margin"
+            android:layout_height="@dimen/card_view_height"
+            app:cardElevation="@dimen/card_view_elevation"
+            android:background="@color/cardviewbackground"
+            android:padding="@dimen/card_view_padding"
+            app:cardCornerRadius="@dimen/card_view_radius"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/phoneIcon"
+                    android:layout_width="@dimen/shop_keeper_details_icon"
+                    android:layout_height="@dimen/shop_keeper_details_icon"
+                    android:src="@drawable/ic_smartphone_call"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    />
+
+                <TextView
+                    android:id="@+id/contact_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/phoneIcon"
+                    android:text="+91-123456789"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/profileDetailsTextColor"
+                    android:textSize="@dimen/text_size_for_shop_details"/>
+
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/navigation_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/card_view_height"
+            android:layout_marginTop="@dimen/horizontal_margin"
+            app:cardElevation="@dimen/card_view_elevation"
+            android:background="@color/cardviewbackground"
+            android:padding="@dimen/card_view_padding"
+            app:cardCornerRadius="@dimen/card_view_radius"
+            >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/navigateIcon"
+                android:layout_width="@dimen/shop_keeper_details_icon"
+                android:layout_height="@dimen/shop_keeper_details_icon"
+                android:src="@drawable/ic_cursor"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:id="@+id/shop_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@+id/navigateIcon"
+                android:text="address 12 shdj dhhd jdjdh"
+                android:layout_marginLeft="10dp"
+                android:maxLines="2"
+                android:textColor="@color/profileDetailsTextColor"
+                android:textSize="@dimen/text_size_shop_address"/>
+
+
+
+        </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+
+
+        <android.support.v7.widget.CardView
+
+            android:id="@+id/shop_timing_card_view"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/horizontal_margin"
+            android:layout_height="@dimen/card_view_height"
+            app:cardElevation="@dimen/card_view_elevation"
+            android:background="@color/cardviewbackground"
+            android:padding="@dimen/card_view_padding"
+            app:cardCornerRadius="@dimen/card_view_radius"
+            android:layout_marginBottom="8dp"
+
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/clockIcon"
+                    android:layout_width="@dimen/shop_keeper_details_icon"
+                    android:layout_height="@dimen/shop_keeper_details_icon"
+                    android:src="@drawable/ic_time"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    />
+
+                <LinearLayout
+                    android:id="@+id/shop_open_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/clockIcon">
+
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Opens At"
+                        android:textSize="@dimen/text_size_for_shop_status"
+                        android:textColor="@color/shop_status"/>
+
+                    <TextView
+                        android:id="@+id/openingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10:00 am"
+                        android:textColor="@color/profileDetailsTextColor"
+                        android:textSize="@dimen/text_size_for_time"/>
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="13dp"
+                    android:layout_toRightOf="@+id/shop_open_layout">
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Closes At"
+                        android:textSize="@dimen/text_size_for_shop_status"
+                        android:textColor="@color/shop_status"/>
+                    <TextView
+                        android:id="@+id/closingTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5:00 pm"
+                        android:textColor="@color/profileDetailsTextColor"
+                        android:textSize="@dimen/text_size_for_time"/>
+                </LinearLayout>
+
+
+
+
+
+
+                <ImageView
+
+                    android:id="@+id/shop_status"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_shop_closed"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:tooltipText="Shop status"
+
+                    />
+
+
+
+
+
+            </RelativeLayout>
+        </android.support.v7.widget.CardView>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</android.support.v4.widget.NestedScrollView>
