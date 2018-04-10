@@ -1,20 +1,5 @@
 package com.example.hp.shoppersstop;
 
-import android.app.Activity;
-import android.app.ListActivity;
-import android.app.LoaderManager;
-import android.app.SearchManager;
-import android.content.AsyncTaskLoader;
-import android.content.Context;
-import android.content.CursorLoader;
-import android.content.Intent;
-import android.content.Loader;
-import android.database.Cursor;
-import android.database.MatrixCursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.net.ParseException;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.BaseColumns;
 import android.support.v4.app.FragmentActivity;
@@ -33,10 +18,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.hp.shoppersstop.database.ProductContentProvider;
-import com.example.hp.shoppersstop.database.ProductContract;
-import com.example.hp.shoppersstop.database.ProductDbHelper;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,12 +45,12 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
       //  private ArrayList<String> arrayListBrand;
 
         private Toolbar toolbarProduct;
-        private ListView listView;
-        private SimpleCursorAdapter simpleCursorAdapter;
+        //private ListView listView;
+        //private SimpleCursorAdapter simpleCursorAdapter;
 
-        private SQLiteDatabase sqLiteDatabase;
-        private ProductDbHelper dbHelper;
-    public SearchView searchView;
+      //  private SQLiteDatabase sqLiteDatabase;
+    //    private ProductDbHelper dbHelper;
+   // public SearchView searchView;
 
     ArrayList<String> arrayListBrand;
 
@@ -81,18 +62,22 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
 
         Toolbar toolbar = findViewById(R.id.search_toolbar);
 
+        arrayListBrand = new ArrayList<>();
+
         DatabaseReference databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
         databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 arrayListBrand.add((String)dataSnapshot.getValue());
-                // Toast.makeText(SearchActivity.this, "Brand: " +  dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SearchActivity.this, "Brand: " +  dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                 arrayListBrand.add((String) dataSnapshot.getValue());
+                Toast.makeText(SearchActivity.this, "List:" + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
+                Log.i(TAG, "Size:" + arrayListBrand.size());
             }
 
             @Override
@@ -111,47 +96,49 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
             }
         });
 
-        String[] arrays = (String[]) arrayListBrand.toArray();
+        if(arrayListBrand.size() != 0) {
 
-        final ArrayAdapter listArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, arrays);
+            String[] arrays = (String[]) arrayListBrand.toArray();
 
-        final AutoCompleteTextView textView =
-                  toolbar.findViewById(R.id.autocompletetextview);
+            final ArrayAdapter listArrayAdapter = new ArrayAdapter<>(this,
+                    android.R.layout.simple_dropdown_item_1line, arrays);
 
-        textView.setAdapter(listArrayAdapter);
+            final AutoCompleteTextView textView =
+                    toolbar.findViewById(R.id.autocompletetextview);
 
-        textView.addTextChangedListener(new TextWatcher() {
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                // no need to do anything
-            }
+            textView.setAdapter(listArrayAdapter);
 
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (((AutoCompleteTextView) textView).isPerformingCompletion()) {
-                    return;
-                }
-                if (charSequence.length() < 2) {
-                    return;
-                }
-                String query = charSequence.toString();
-                listArrayAdapter.clear();
-
-                List<String> data = new ArrayList<String>();
-                data.add( query);
-
-
-
-               if (arrayListBrand.size() != 0) {
-                    // transform from json to your object
-                    listArrayAdapter.add(arrayListBrand);
+            textView.addTextChangedListener(new TextWatcher() {
+                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    // no need to do anything
                 }
 
-            }
+                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                    if (((AutoCompleteTextView) textView).isPerformingCompletion()) {
+                        return;
+                    }
+                    if (charSequence.length() < 2) {
+                        return;
+                    }
+                    String query = charSequence.toString();
+                    listArrayAdapter.clear();
 
-            @Override
-            public void afterTextChanged(Editable editable) { }
-        });
+                    List<String> data = new ArrayList<String>();
+                    data.add(query);
 
+
+                    if (arrayListBrand.size() != 0) {
+                        // transform from json to your object
+                        listArrayAdapter.add(arrayListBrand);
+                    }
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
+                }
+            });
+        }
         /*dbHelper = new ProductDbHelper(this);
 
         sqLiteDatabase = dbHelper.getReadableDatabase();*/
@@ -306,7 +293,7 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
         databaseReferencePrice = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product");
         databaseReferenceWeight = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product");
 
-        */databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
+        databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -338,14 +325,14 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
         toolbarProduct = findViewById(R.id.toolbar_product);
         toolbarProduct.setVisibility(View.INVISIBLE);
 
-        spinner = findViewById(R.id.spinner);
+        spinner = findViewById(R.id.spinner);*/
 
         // TODO: 10-02-2018
-        ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spinner_list, R.layout.support_simple_spinner_dropdown_item);
+      /*  ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spinner_list, R.layout.support_simple_spinner_dropdown_item);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener)this);
-
+           */
        // handleIntent(getIntent());
     }
         //search suggestion...
@@ -451,7 +438,7 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
 
     }*/
 
-    private static class FetchSearchSuggestion extends AsyncTask<String, Void, Cursor> {
+   /* private static class FetchSearchSuggestion extends AsyncTask<String, Void, Cursor> {
 
         private static final String TAG = "FetchSearchSuggestion";
 
@@ -516,6 +503,6 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
 
             searchActivity.searchView.getSuggestionsAdapter().changeCursor(result);
         }
-    }
+    }*/
 
 }

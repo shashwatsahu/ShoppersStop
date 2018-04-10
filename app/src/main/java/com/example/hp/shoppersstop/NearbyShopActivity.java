@@ -43,8 +43,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import UserViewHolder.example.hp.shoppersstop.ShopModel;
-
 public class NearbyShopActivity extends AppCompatActivity implements GeoQueryEventListener{
 
     private  ShimmerFrameLayout mShimmerFrameLayout;

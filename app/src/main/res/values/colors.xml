@@ -10,9 +10,6 @@
     <color name="SecondaryText">#757575</color>
     <color name="Divider">#BDBDBD</color>
     <color name="Transparent">#00000000</color>
-<<<<<<< HEAD
-=======
-
 
     <color name = "common_background">#4fc3f7</color>
     <color name = "grey_background">#e0e0e0</color>
@@ -29,6 +26,4 @@
     <color name="cardviewbackground">#eeeeee</color>
     <color name="shop_status">#9e9e9e</color>
 
-
->>>>>>> 0080a75a0e5bf4c8f3dbbf901bcfb44a13ce34b1
 </resources>

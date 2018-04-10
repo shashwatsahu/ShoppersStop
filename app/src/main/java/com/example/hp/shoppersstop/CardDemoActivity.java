@@ -9,14 +9,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.example.hp.shoppersstop.R;
-
-import java.util.List;
-
-import UserViewHolder.example.hp.shoppersstop.Constants;
-import UserViewHolder.example.hp.shoppersstop.ListItem;
-import UserViewHolder.example.hp.shoppersstop.ListRecyclerView;
-
 /**
  * Created by hp on 03-02-2018.
  */

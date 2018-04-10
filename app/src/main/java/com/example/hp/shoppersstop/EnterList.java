@@ -3,12 +3,9 @@ package com.example.hp.shoppersstop;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
-import android.text.TextWatcher;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -16,7 +13,6 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import com.example.hp.shoppersstop.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
@@ -29,10 +25,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import UserViewHolder.example.hp.shoppersstop.ListRecyclerView;
-import UserViewHolder.example.hp.shoppersstop.MainActivity;
-
-import static java.nio.file.Paths.get;
 
 /**
  * Created by hp on 11-02-2018.

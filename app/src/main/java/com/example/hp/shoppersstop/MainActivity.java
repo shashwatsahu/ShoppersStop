@@ -34,9 +34,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hp.shoppersstop.R;
-import com.example.hp.shoppersstop.UserViewHolder;
-import com.example.hp.shoppersstop.database.ProductDbHelper;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -52,15 +49,11 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.example.hp.shoppersstop.database.ProductContract.ProductEntry;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
-import UserViewHolder.example.hp.shoppersstop.SearchActivity;
-import UserViewHolder.example.hp.shoppersstop.database.ProductDbHelper;
 
 
 public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>,
@@ -96,7 +89,6 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     private ImageView userProfile;
 
     private SQLiteDatabase sqLiteDatabase;
-    private ProductDbHelper productDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,8 +97,6 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
 
         //Shimmer effect...
 //Making database object...
-
-        productDbHelper = new ProductDbHelper(this);
 
         Toast.makeText(this, "Welcomes U!", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "hello Im working!");
@@ -305,7 +295,8 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                     updateUI(user);
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(MainActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "Authentication Failed", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
             }
@@ -313,7 +304,8 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     }
 
     public void signIn (String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
@@ -323,7 +315,8 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                 }
                 else {
                     Log.w (TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(MainActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "Authentication Failed", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
             }
@@ -350,7 +343,8 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     }
 
     private ActionBarDrawerToggle getActionBarDrawerToggle(){
-        return new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+        return new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);

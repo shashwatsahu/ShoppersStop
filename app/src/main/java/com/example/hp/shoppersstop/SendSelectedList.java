@@ -33,8 +33,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import UserViewHolder.example.hp.shoppersstop.ShopListItem;
-
 public class SendSelectedList extends AppCompatActivity implements View.OnClickListener
         , RecyclerView.OnItemTouchListener{
 
