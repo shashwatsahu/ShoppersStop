@@ -75,6 +75,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Toast.makeText(this, "Updating map", Toast.LENGTH_SHORT).show();
 
         getMyLocation();
+
+
         addNearbyShopsMarker();
 
 
