@@ -4,22 +4,29 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.app.LoaderManager;
 import android.app.SearchManager;
+import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.ParseException;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CursorAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
@@ -44,35 +51,173 @@ import java.util.List;
  * Created by hp on 10-02-2018.
  */
 
-public class SearchActivity extends FragmentActivity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemSelectedListener{
+public class SearchActivity extends FragmentActivity/*implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemSelectedListener*/{
 
     private static final String TAG = "SearchActivity";
-    private Spinner spinner, spinnerBrand, spinnerDepartment, spinnerPrice, spinnerWeight;
+    private static final int SEARCH_QUERY_THRESHOLD = 2;
+    // private static final String TAG = "SearchActivity";
+        private Spinner spinner, spinnerBrand, spinnerDepartment, spinnerPrice, spinnerWeight;
 
-    private static final int PRODUCT = 0;
-    private static final int SHOP = 1;
+        private static final int PRODUCT = 0;
+        private static final int SHOP = 1;
 
-    private ArrayList<String> arrayListBrand;
+      //  private ArrayList<String> arrayListBrand;
 
-    private Toolbar toolbarProduct;
-    private ListView listView;
-    private SimpleCursorAdapter simpleCursorAdapter;
+        private Toolbar toolbarProduct;
+        private ListView listView;
+        private SimpleCursorAdapter simpleCursorAdapter;
 
-    private SQLiteDatabase sqLiteDatabase;
-    private ProductDbHelper dbHelper;
+        private SQLiteDatabase sqLiteDatabase;
+        private ProductDbHelper dbHelper;
+    public SearchView searchView;
+
+    ArrayList<String> arrayListBrand;
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
+        //searchView = findViewById(R.id.search_view);
 
-        dbHelper = new ProductDbHelper(this);
+        Toolbar toolbar = findViewById(R.id.search_toolbar);
 
-        sqLiteDatabase = dbHelper.getReadableDatabase();
+        DatabaseReference databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
+        databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = findViewById(R.id.search_view);
+                arrayListBrand.add((String)dataSnapshot.getValue());
+                // Toast.makeText(SearchActivity.this, "Brand: " +  dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                arrayListBrand.add((String) dataSnapshot.getValue());
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.i(TAG, "Brand name cancel!");
+            }
+        });
+
+        final ArrayAdapter<List<String>> listArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, arrayListBrand);
+
+        final AutoCompleteTextView textView =
+                  toolbar.findViewById(R.id.autocompletetextview);
+
+        textView.setAdapter(listArrayAdapter);
+
+        textView.addTextChangedListener(new TextWatcher() {
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                // no need to do anything
+            }
+
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (((AutoCompleteTextView) textView).isPerformingCompletion()) {
+                    return;
+                }
+                if (charSequence.length() < 2) {
+                    return;
+                }
+                String query = charSequence.toString();
+                listArrayAdapter.clear();
+
+                List<String> data = new ArrayList<String>();
+                data.add( query);
+
+
+
+               if (arrayListBrand.size() != 0) {
+                    // transform from json to your object
+                    listArrayAdapter.add();
+                }
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) { }
+        });
+
+        /*dbHelper = new ProductDbHelper(this);
+
+        sqLiteDatabase = dbHelper.getReadableDatabase();*/
+
+        /*SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        searchView.setSuggestionsAdapter(new android.support.v4.widget.SimpleCursorAdapter(
+                SearchActivity.this, android.R.layout.simple_list_item_1, null,
+                new String[] { SearchManager.SUGGEST_COLUMN_TEXT_1 },
+                new int[] { android.R.id.text1 }, 0));
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextChange(String query) {
+
+                if (query.length() >= SEARCH_QUERY_THRESHOLD) {
+                    new FetchSearchSuggestion().execute(query);
+                } else {
+                    searchView.getSuggestionsAdapter().changeCursor(null);
+                }
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                // if user presses enter, do default search, ex:
+                if (query.length() >= SEARCH_QUERY_THRESHOLD) {
+
+                    Intent intent = new Intent();
+                    intent.setAction(Intent.ACTION_SEARCH);
+                    intent.putExtra(SearchManager.QUERY, query);
+                    startActivity(intent);
+
+                    searchView.getSuggestionsAdapter().changeCursor(null);
+                    return true;
+                }
+                return false;
+            }
+        });
+
+        searchView.setOnSuggestionListener(new SearchView.OnSuggestionListener() {
+
+            @Override
+            public boolean onSuggestionSelect(int position) {
+
+                Cursor cursor = (Cursor) searchView.getSuggestionsAdapter().getItem(position);
+                String term = cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1));
+                cursor.close();
+
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_SEARCH);
+                intent.putExtra(SearchManager.QUERY, term);
+                startActivity(intent);
+
+                return true;
+            }
+
+            @Override
+            public boolean onSuggestionClick(int position) {
+
+                return onSuggestionSelect(position);
+            }
+        });
         // Assumes current activity is the searchable activity
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+      /*  searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
 
         searchView.setIconifiedByDefault(false); // Do not iconify the widget; expand it by default
 
@@ -89,9 +234,9 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
 
                 return true;
             }
-        });
+        });*/
 
-        listView = findViewById(R.id.list);
+       /* listView = findViewById(R.id.list);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -107,9 +252,9 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
                 // Open the activity
                 startActivity(intent);
             }
-        });
+        });*/
 
-        String[] projection = {ProductContract.ProductEntry._ID, ProductContract.ProductEntry.PRODUCT_NAME};
+       /* String[] projection = {ProductContract.ProductEntry._ID, ProductContract.ProductEntry.PRODUCT_NAME};
         String selection = ProductContract.ProductEntry.PRODUCT_NAME + " LIKE ?";
 
 
@@ -154,12 +299,12 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
 
         arrayListBrand = new ArrayList<String>();
 
-        databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
-        databaseReferenceDepartment = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("department");
+       */ databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
+        /*databaseReferenceDepartment = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("department");
         databaseReferencePrice = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product");
         databaseReferenceWeight = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product");
 
-        databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
+        */databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
@@ -197,20 +342,20 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
         ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spinner_list, R.layout.support_simple_spinner_dropdown_item);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
-        spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener)this);
 
-        handleIntent(getIntent());
+       // handleIntent(getIntent());
     }
         //search suggestion...
 
-    private void handleIntent(Intent intent) {
+    /*private void handleIntent(Intent intent) {
 
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String searchQuery = intent.getStringExtra(SearchManager.QUERY);
                 doSearch(searchQuery);
-            /*CustomSearchAdapter adapter = new CustomSearchAdapter(this,
+            |*CustomSearchAdapter adapter = new CustomSearchAdapter(this,
                     android.R.layout.simple_dropdown_item_1line, );
-            listView.setAdapter(adapter);*/
+           * |listView.setAdapter(adapter);
 
         }else if(Intent.ACTION_VIEW.equals(intent.getAction())) {
             String selectedSuggestionRowId =  intent.getDataString();
@@ -225,12 +370,12 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
         Bundle data = new Bundle();
         data.putString("query", query);
 
-        // Invoking onCreateLoader() in non-ui thread
+        //Invoking onCreateLoader() in non-ui thread
         getSupportLoaderManager().initLoader(1, data, (android.support.v4.app.LoaderManager.LoaderCallbacks) this);
 
     }
 
-       /*
+       |*
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doSearch(query);
@@ -242,14 +387,14 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
             startActivity(detailsIntent);
             finish();
         }
-    }*/
+    }*|
 
-    /*private void doSearch(String query) {
+    |*private void doSearch(String query) {
         CustomSearchAdapter adapter = new CustomSearchAdapter(this,
                 android.R.layout.simple_dropdown_item_1line,
                 StoresData.filterData(searchQuery));
         listView.setAdapter(adapter);
-    }*/
+    }*|
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -302,5 +447,73 @@ public class SearchActivity extends FragmentActivity implements LoaderManager.Lo
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }*/
+
+    private static class FetchSearchSuggestion extends AsyncTask<String, Void, Cursor> {
+
+        private static final String TAG = "FetchSearchSuggestion";
+
+        private static final String[] sAutocompleteColNames = new String[] {
+                BaseColumns._ID,                         // necessary for adapter
+                SearchManager.SUGGEST_COLUMN_TEXT_1      // the full search term
+        };
+
+        @Override
+        protected Cursor doInBackground(String... params) {
+
+            final MatrixCursor cursor = new MatrixCursor(sAutocompleteColNames);
+
+            // get your search terms from the server here, ex:
+            DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("shopstore")
+                    .child("product").child("brand");
+
+            databaseReference.addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                    for(int i=0; i < dataSnapshot.getChildrenCount(); i++){
+                        String term = (String) dataSnapshot.getValue();
+
+                        Object[] row = new Object[] { i, term };
+                        cursor.addRow(row);
+                        Log.i(TAG, "child:" + term);
+                    }
+
+                }
+
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+            // parse your search terms into the MatrixCursor
+
+            return cursor;
+        }
+
+        @Override
+        protected void onPostExecute(Cursor result) {
+
+            SearchActivity searchActivity = new SearchActivity();
+
+            searchActivity.searchView.getSuggestionsAdapter().changeCursor(result);
+        }
     }
+
 }

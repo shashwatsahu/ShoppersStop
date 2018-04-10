@@ -51,7 +51,7 @@ public class ShopsActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(layoutManager);
 
         Query query = FirebaseDatabase.getInstance().getReference().child("shopstore").child("seller")
-                                              .child(shopCategoryName).child("userID");
+                                              .child(shopCategoryName).child("userInfo").child("info");
 
         firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ShopListItem, ShopListViewHolder>(ShopListItem.class, R.layout.shop_card_view
         , ShopListViewHolder.class, query) {

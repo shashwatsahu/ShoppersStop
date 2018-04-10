@@ -6,28 +6,6 @@
     <dimen name="button_elevation">2dp</dimen>
     <dimen name="button_press_elevation">4dp</dimen>
 
-        <dimen name="customer_profile_card_view_height">90dp</dimen>
-        <dimen name = "default_padding">12dp</dimen>
-        <dimen name="text_size_for_profile_card_view">22sp</dimen>
-        <dimen name="margin_left_between_elements">30dp</dimen>
-        <dimen name="icon_profile_height_width">24dp</dimen>
-
-    <dimen name="horizontal_margin">8dp</dimen>
-    <dimen name="card_view_elevation">2dp</dimen>
-    <dimen name="card_view_height">100dp</dimen>
-    <dimen name = "card_view_padding">8dp</dimen>
-    <dimen name = "shop_keeper_details_icon">35dp</dimen>
-    <dimen name="card_view_radius">5dp</dimen>
-    <dimen name="text_size_for_shop_details">20sp</dimen>
-    <dimen name="text_size_shop_address">20sp</dimen>
-    <dimen name="text_size_for_time">20sp</dimen>
-    <dimen name="text_size_for_shop_status">12sp</dimen>
-
-    <dimen name="placeholder_image">160dp</dimen>
-    <dimen name="layout_padding">8dp</dimen>
-    <dimen name="shopName_text">24sp</dimen>
-    <dimen name="shopDistance_text">20sp</dimen>
-    <dimen name="shop_action_buttons">50dp</dimen>
 
 
 </resources>

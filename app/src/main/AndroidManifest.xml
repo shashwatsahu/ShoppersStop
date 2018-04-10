@@ -74,11 +74,7 @@
                     android:parentActivityName=".ListRecyclerView"
                     android:theme="@style/AppTheme"/>
 
-        <activity android:name=".Customer_Profile_Main_Page" />
-        <activity android:name=".TermsAndConditions" />
-        <activity android:name=".AboutUsActivity" />
         <activity android:name=".EditProfile" />
-        <activity android:name=".ImproveUsActivity" />
     </application>
 
 </manifest>

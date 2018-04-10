@@ -34,6 +34,7 @@
                 android:layout_alignStart="@id/message_id"
                 android:gravity="center_horizontal"
                 android:layout_height="wrap_content"
+                android:onClick="sendList"
                 android:background="@color/Transparent"
                 android:layout_alignParentEnd="true"
                 android:src="@drawable/ic_send"/>

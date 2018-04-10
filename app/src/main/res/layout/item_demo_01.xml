@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:id="@+id/container_list_item"
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container_list_item"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:clickable="true"
-    android:focusable="true"
     android:background="@drawable/statelist_item_background">
 
-    <include layout="@layout/card_view_recycler_view"/>
+    <include layout="@layout/list_layout"/>
 
 </RelativeLayout>

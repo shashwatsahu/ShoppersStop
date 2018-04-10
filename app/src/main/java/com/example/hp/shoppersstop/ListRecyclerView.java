@@ -1,9 +1,7 @@
 package com.example.hp.shoppersstop;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.GestureDetectorCompat;
@@ -26,23 +24,16 @@ import android.view.ViewGroup;
 
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hp.shoppersstop.Utils.RecyclerItemClickListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,22 +43,19 @@ import static com.example.hp.shoppersstop.EnterList.uid;
 public class ListRecyclerView extends AppCompatActivity implements View.OnClickListener, RecyclerView.OnItemTouchListener{
 
     private static final String TAG = "ListRecyclerView";
-
-    private GestureDetectorCompat gestureDetectorCompat;
-    private ProgressBar progressBar;
     private RecyclerView mRecyclerView;
-
+    private ProgressBar progressBar;
     private ActionMode actionMode;
     private Toolbar toolbar;
+
+    private GestureDetectorCompat gestureDetectorCompat;
+    private SparseBooleanArray selectedItems;
+    private ArrayList<ListItem> userList = new ArrayList<>();
+    private ArrayList<ListItem> multiselectList = new ArrayList<>();
 
     private DatabaseReference databaseReference;
 
     private FirebaseRecyclerAdapter<ListItem, ListViewHolder> firebaseRecyclerAdapter;
-
-    private SparseBooleanArray selectedItems;
-
-    private ArrayList<ListItem> user_list = new ArrayList<>();
-    private ArrayList<ListItem> multiselect_list = new ArrayList<>();
 
     private boolean isMultiSelect = false;
     private ArrayList<ListItem> itemArrayList = new ArrayList<ListItem>();
@@ -94,7 +82,16 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
 
             switch (item.getItemId()) {
                 case R.id.action_select:
-                    startActivity(new Intent(ListRecyclerView.this, SendSelectedList.class));
+                    if(getSelectedItemCount() > 0) {
+                        Intent intent = new Intent(ListRecyclerView.this, SendSelectedList.class);
+                        intent.putParcelableArrayListExtra(Constants.MULTISELECT, multiselectList);
+                        for(int i = 0; i < multiselectList.size(); i++) {
+                            Log.i(TAG, "Name:" + multiselectList.get(i).getName());
+                        }
+                        startActivity(intent);
+                    }
+                    else
+                        Toast.makeText(ListRecyclerView.this, "No Item Selected!", Toast.LENGTH_SHORT).show();
                     return true;
                 case R.id.action_remove:
                     List<Integer> selectedItemPositions = getSelectedItems();
@@ -208,7 +205,7 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-       // mAdapter = new MyAdapter();
+       // mAdapter = new SearchAdapter();
         Query query = FirebaseDatabase.getInstance().getReference().child("shopstore")
                 .child("customer").child(uid).child("productList");
 
@@ -219,21 +216,21 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
 
 
 
-        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ListItem, ListViewHolder> (ListItem.class, R.layout.item_demo_01,
+        firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<ListItem, ListViewHolder> (ListItem.class, R.layout.card_view_recycler_view,
                 ListViewHolder.class, query){
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             protected void populateViewHolder(ListViewHolder viewHolder, ListItem model, int position) {
 
                        try {
-                            user_list.add(model);
+                            userList.add(model);
                            viewHolder.quantity.setText(String.valueOf(model.getQuant()));
                            viewHolder.name.setText(model.getName());
                            viewHolder.brand.setText(model.getBrand());
                            viewHolder.price.setText( String.valueOf(model.getPrice()));
                            viewHolder.weight.setText(String .valueOf(model.getWeight()));
 
-                           viewHolder.itemView.setBackgroundColor(selectedItems.get(position)? 0x9934B5E4
+                           viewHolder.cardView.setCardBackgroundColor(selectedItems.get(position)? 0x9934B5E4
                                    : Color.TRANSPARENT);
 
                            Log.i(TAG, "Position:" + viewHolder.getAdapterPosition() + "Name:" + model.getName());
@@ -260,7 +257,7 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
                 // Create a new instance of the ViewHolder, in this case we are using a custom
                 // layout called R.layout.message for each item
                 View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_demo_01, parent, false);
+                        .inflate(R.layout.activity_cardview_demo, parent, false);
 
                 return new ListViewHolder(view);
             }
@@ -297,7 +294,7 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
                 }
 
                 if (!isMultiSelect) {
-                    multiselect_list = new ArrayList<ListItem>();
+                    multiselectList = new ArrayList<ListItem>();
                     actionMode = startActionMode(mActionModeCallback);
                     isMultiSelect = true;
 
@@ -317,18 +314,18 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
     Log.i(TAG, "multiselect");
 
        if (actionMode != null) {
-            if (multiselect_list.contains(user_list.get(position))){
-                multiselect_list.remove(user_list.get(position));
+            if (multiselectList.contains(userList.get(position))){
+                multiselectList.remove(userList.get(position));
             Log.i(TAG, "remove");
             }
             else{
-                multiselect_list.add(user_list.get(position));
+                multiselectList.add(userList.get(position));
                 Log.i(TAG, "add");
 
             }
 
-            if (multiselect_list.size() > 0)
-                actionMode.setTitle("" + multiselect_list.size());
+            if (multiselectList.size() > 0)
+                actionMode.setTitle("" + multiselectList.size());
             else
                 actionMode.setTitle("");
 
@@ -339,8 +336,8 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
 
     public void refreshAdapter(int position)
     {
-       /* multiSelectAdapter.selected_usersList=multiselect_list;
-        multiSelectAdapter.usersList=user_list;
+       /* multiSelectAdapter.selected_usersList=multiselectList;
+        multiSelectAdapter.usersList=userList;
         multiSelectAdapter.notifyDataSetChanged();*/
 
        firebaseRecyclerAdapter.notifyItemRemoved(position);
@@ -400,16 +397,16 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
 
     private List<ListItem> list;
 
-
-
     public void toggleSelection(int pos){
 
         Log.i(TAG, "toggleSelection:" + pos);
         if(selectedItems.get(pos, false)){
             selectedItems.delete(pos);
+            if(multiselectList.contains(firebaseRecyclerAdapter.getItem(pos)))
+            multiselectList.remove(firebaseRecyclerAdapter.getItem(pos));
         }
         else {
-
+            multiselectList.add(firebaseRecyclerAdapter.getItem(pos));
             selectedItems.put(pos, true);
         }
         firebaseRecyclerAdapter.notifyItemChanged(pos);
@@ -439,7 +436,6 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
         return items;
     }
 
-
     public void addData(ListItem listItem, int position){
         list.add(position, listItem);
         firebaseRecyclerAdapter.notifyItemInserted(position);
@@ -459,6 +455,7 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
     private class ListViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemClickListener{
 
         private TextView name, brand, price, quantity, weight;
+        CardView cardView;
 
         private ListViewHolder(View itemView) {
             super(itemView);
@@ -467,7 +464,7 @@ public class ListRecyclerView extends AppCompatActivity implements View.OnClickL
             price = itemView.findViewById(R.id.price_txt);
             quantity = itemView.findViewById(R.id.quantity_txt);
             weight = itemView.findViewById(R.id.weight_txt);
-
+            cardView = itemView.findViewById(R.id.card_view_item_layout);
         }
 
         @Override

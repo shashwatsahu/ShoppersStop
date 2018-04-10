@@ -93,11 +93,14 @@ public class EnterList extends AppCompatActivity {
         myRef = database.getReference();
 
 
-        if ((name1.length() > 0) && (brand1.length() > 0) && (price1.length() > 0) && (quant1.length() > 0) && (weight1.length() > 0)) {
+        if ((name1.length() > 0) && (brand1.length() > 0) && (price1.length() > 0)
+                && (quant1.length() > 0) && (weight1.length() > 0)) {
 
             Toast.makeText(EnterList.this, " Not Null! ", Toast.LENGTH_SHORT).show();
 
-            ListItem listItem = new ListItem(name1, brand1, Integer.parseInt(quant1), Double.parseDouble(price1), Double.parseDouble(weight1));
+            ListItem listItem = new ListItem(name1, brand1, Integer.parseInt(quant1),
+                    Double.parseDouble(price1), Double.parseDouble(weight1));
+
             final Map<String, Object> listValues = listItem.toMap();
 
             Map<String, Object> sendList = new HashMap<>();
@@ -106,10 +109,12 @@ public class EnterList extends AppCompatActivity {
             sendList.put("/" + name1, listValues);
             Log.i(TAG, "path2" + myRef.getRef().toString());
 
-            myRef.child("shopstore").child("customer").child(uid).child("productList").updateChildren(sendList);
+            myRef.child("shopstore").child("customer")
+                    .child(uid).child("productList").updateChildren(sendList);
             Log.i(TAG, "path3" + myRef.getRef().toString());
 
-            myRef.child("shopstore").child("customer").child(uid).child("productList").addChildEventListener(new ChildEventListener() {
+            myRef.child("shopstore").child("customer").child(uid)
+                    .child("productList").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                     ListItem listItem1 = dataSnapshot.getValue(ListItem.class);

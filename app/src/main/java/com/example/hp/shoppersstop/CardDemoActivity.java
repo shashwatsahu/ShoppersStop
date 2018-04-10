@@ -33,7 +33,7 @@ public class CardDemoActivity extends Activity {
          Log.i(TAG, "Mag:" + id);
 
         setContentView(R.layout.activity_cardview_demo);
-        cardView = findViewById(R.id.card_detail);
+        cardView = findViewById(R.id.card_view_item_layout);
         View innerContainer = cardView.findViewById(R.id.container_inner_item);
         innerContainer.setTransitionName(Constants.NAME_INNER_CONTAINER);
 
