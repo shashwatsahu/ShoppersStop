@@ -58,7 +58,8 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>, RecyclerView.OnItemTouchListener, View.OnClickListener, ActionMode.Callback{
+public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>,
+        RecyclerView.OnItemTouchListener, View.OnClickListener, ActionMode.Callback{
 
     public static final String UID = "USER_ID";
 
@@ -98,14 +99,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         setContentView(R.layout.activity_main);
 
         //Shimmer effect...
-
-        ShimmerFrameLayout container =
-                (ShimmerFrameLayout) findViewById(R.id.shimmer_view_container);
-        container.startShimmerAnimation();
-
-
-
-        //Making database object...
+//Making database object...
 
         productDbHelper = new ProductDbHelper(this);
 
@@ -156,6 +150,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
 
         mDrawerLayout.addDrawerListener(mDrawerToggle);
         try {
+
             getActionBar().setDisplayHomeAsUpEnabled(true);
             getActionBar().setHomeButtonEnabled(true);
         } catch (Exception e) {
@@ -166,11 +161,13 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
                 switch (position) {
                     case 0:
+                        getActionBarDrawerToggle();
                         break;
                     case 1:
                         startActivity(new Intent(MainActivity.this, ShopsCategoryActivity.class));
                         break;
                     case 2:
+
                         break;
 
                     case 3:
@@ -180,29 +177,39 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                     case 5:
                         break;
                     case 6:
+
                         break;
                     case 7:
+                        startActivity(new Intent(MainActivity.this, PendingOrderActivity.class));
                         break;
                     case 8:
+                        startActivity(new Intent(MainActivity.this, Customer_Profile_Main_Page.class));
                         break;
                     case 9:
+                        startActivity(new Intent(MainActivity.this, ImproveUsActivity.class));
                         break;
                     case 10:
+                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         break;
                     case 11:
+                        startActivity(new Intent(MainActivity.this, TermsAndConditions.class));
+
                         break;
                     case 12:
-                        AuthUI.getInstance()
-                                .signOut(MainActivity.this)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        // ...
-                                        Log.i(TAG, "Log out:" + position);
-                                        Toast.makeText(MainActivity.this, "Position:" + position, Toast.LENGTH_SHORT).show();
-                                        signIn();
 
-                                    }
-                                });
+                        if(mAuth.getUid() != null) {
+                            AuthUI.getInstance()
+                                    .signOut(MainActivity.this)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            // ...
+                                            Log.i(TAG, "Log out:" + position);
+                                            Toast.makeText(MainActivity.this, "Position:" + position, Toast.LENGTH_SHORT).show();
+                                            signIn();
+
+                                        }
+                                    });
+                        }
                         break;
                 }
             }
@@ -239,7 +246,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-                Log.i(TAG, "OnCreateResult:" + firebaseUser.getUid());
+              //  Log.i(TAG, "OnCreateResult:" + firebaseUser.getUid());
                 // ...
             } else {
 
@@ -255,6 +262,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         super.onStart();
         //Check if user is signed in and update UI accordingly.
         firebaseUser = mAuth.getCurrentUser();
+       if(mAuth.getCurrentUser() != null)
         Log.w(TAG, "oncreate4:" + firebaseUser.getUid());
           //  mFirebaseDatabase = FirebaseDatabase.getInstance();
             //mDatabaseReference = mFirebaseDatabase.getReference("" + firebaseUser.getUid());
@@ -305,8 +313,8 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
                     Log.d(TAG, "signInWithEmail:success");
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    updateUI(user);
+                     firebaseUser = mAuth.getCurrentUser();
+                    updateUI(firebaseUser);
                 }
                 else {
                     Log.w (TAG, "signInWithEmail:failure", task.getException());
@@ -318,18 +326,19 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     }
 
     public void getCurrentUser() {
-        FirebaseUser user = mAuth.getCurrentUser();
-        if(user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUri = user.getPhotoUrl();
+        firebaseUser = mAuth.getCurrentUser();
+        if(firebaseUser != null) {
+            String name = firebaseUser.getDisplayName();
+            String email = firebaseUser.getEmail();
+            Uri photoUri = firebaseUser.getPhotoUrl();
 
-            boolean emailVerified = user.isEmailVerified();
-            String uid = user.getUid();
+            boolean emailVerified = firebaseUser.isEmailVerified();
+            String uid = firebaseUser.getUid();
         }
     }
 
     public void getInputList(View view) {
+        firebaseUser = mAuth.getCurrentUser();
         Intent intent = new Intent(MainActivity.this, EnterList.class);
         intent.putExtra(UID, firebaseUser.getUid());
         startActivity(intent);
@@ -373,7 +382,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         arrayList.add(new DrawerList("My Orders", null));
         arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_36dp)));
         arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
-        arrayList.add(new DrawerList("Help Centre", getDrawable(R.drawable.ic_help)));
+        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
         arrayList.add(new DrawerList("Legal", null));
         arrayList.add(new DrawerList("Log Out",null));
 

@@ -10,4 +10,14 @@
     <color name="SecondaryText">#757575</color>
     <color name="Divider">#BDBDBD</color>
     <color name="Transparent">#00000000</color>
+
+   <!-- <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>-->
+    <color name = "common_background">#4fc3f7</color>
+    <color name = "grey_background">#e0e0e0</color>
+    <color name="text_color_for_profile_top">#fafafa</color>
+    <color name="text_color_for_options">#424242</color>
+    <color name="text_color_for_error">#f44336</color>
+    <color name="send_suggestion">#FFD15C</color>
 </resources>

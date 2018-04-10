@@ -77,11 +77,11 @@ public class EnterList extends AppCompatActivity {
     }
 
     public void getInputList(View view) {
-        EditText name = findViewById(R.id.nam_edt);
-        EditText brand = findViewById(R.id.brnd_edt);
-        EditText price = findViewById(R.id.prc_edt);
-        EditText quant = findViewById(R.id.quant_edt);
-        EditText weight = findViewById(R.id.wt_edt);
+        final EditText name = findViewById(R.id.nam_edt);
+        final EditText brand = findViewById(R.id.brnd_edt);
+        final EditText price = findViewById(R.id.prc_edt);
+        final EditText quant = findViewById(R.id.quant_edt);
+        final EditText weight = findViewById(R.id.wt_edt);
 
         String name1 = name.getText().toString().trim();
         String brand1 = brand.getText().toString().trim();
@@ -102,11 +102,8 @@ public class EnterList extends AppCompatActivity {
 
             Map<String, Object> sendList = new HashMap<>();
 
-            listKey = myRef.push().getKey();
-            Toast.makeText(EnterList.this, "key:" + listKey + " reference: " + myRef.getRef().toString(), Toast.LENGTH_SHORT).show();
-
             Log.i(TAG, "path1" + myRef.getRef().toString());
-            sendList.put("/" + listKey, listValues);
+            sendList.put("/" + name1, listValues);
             Log.i(TAG, "path2" + myRef.getRef().toString());
 
             myRef.child("shopstore").child("customer").child(uid).child("productList").updateChildren(sendList);
@@ -119,10 +116,13 @@ public class EnterList extends AppCompatActivity {
                     if (listItem1 != null) {
                         Log.i(TAG, "path" + myRef.getRef().toString());
 
-                        Toast.makeText(EnterList.this, "Successfully saved :" + listItem1.getName() + "!"
-                                + " reference: " + myRef.getRef().toString(), Toast.LENGTH_SHORT).show();
-
                     }
+                    name.setText("");
+                    weight.setText("");
+                    price.setText("");
+                    quant.setText("");
+                    brand.setText("");
+
                 }
 
                 @Override

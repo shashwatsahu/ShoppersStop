@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -28,10 +28,13 @@
             android:name=".EnterList"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
+        <activity
+            android:name=".PendingOrderActivity"
+            android:label="Pending orders"
+            android:theme="@style/AppTheme" />
         <activity android:name=".MyAccount" />
         <activity
             android:name=".ListRecyclerView"
@@ -44,21 +47,35 @@
         <activity
             android:name=".ShopsCategoryActivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme"/>
-
-        <activity android:name=".SearchActivity"
-            android:launchMode="singleTop" >
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ProfileActivity"
+            android:label="profile activity"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".SearchActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
 
         <provider
+            android:name=".database.ProductContentProvider"
             android:authorities="com.example.hp.shoppersstop"
-            android:exported="false"
-            android:name="com.example.hp.shoppersstop.database.ProductContentProvider"/>
+            android:exported="false" />
+
+        <activity android:name=".FavouriteListActivity" />
+        <activity android:name=".SendSelectedList"></activity>
+        <activity android:name=".Customer_Profile_Main_Page" />
+        <activity android:name=".TermsAndConditions" />
+        <activity android:name=".AboutUsActivity" />
+        <activity android:name=".EditProfile" />
+        <activity android:name=".ImproveUsActivity" />
     </application>
 
 </manifest>

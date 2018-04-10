@@ -1,5 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_size">56dp</dimen>
+    <dimen name="button_elevation">2dp</dimen>
+    <dimen name="button_press_elevation">4dp</dimen>
+
+        <dimen name="customer_profile_card_view_height">90dp</dimen>
+        <dimen name = "default_padding">12dp</dimen>
+        <dimen name="text_size_for_profile_card_view">22sp</dimen>
+        <dimen name="margin_left_between_elements">30dp</dimen>
+        <dimen name="icon_profile_height_width">24dp</dimen>
+
+
 </resources>

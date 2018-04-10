@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorPrimaryText"
+    tools:context="com.example.hp.shoppersstop.ProfileActivity">
+
+    <RelativeLayout
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:padding="16dp"
+        android:layout_height="100dp">
+
+        <ImageView
+            android:id="@+id/profile_pic_id"
+            android:contentDescription="@string/account_profile_picture"
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"/>
+
+        <TextView
+            android:id="@+id/category_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/profile_pic_id"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="394dp"
+            android:text="shashwat"
+            android:textColor="@color/colorPrimaryDarkText"
+            android:textSize="18sp" />
+
+    </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/name_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="65dp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <TextView
+                    android:id="@+id/profile_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_toEndOf="@id/name_heading"
+                    android:singleLine="true"
+                    android:layout_toStartOf="@id/merchant_name_btn"
+                    android:text="shashwat"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <ImageButton
+                    android:contentDescription="@string/edit_button"
+                    android:id="@+id/merchant_name_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_pencil"
+                    android:background="@color/Transparent"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/shop_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shop Name"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <TextView
+                    android:id="@+id/shop_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    android:layout_toStartOf="@id/shop_name_btn"
+                    android:layout_toEndOf="@id/shop_heading"
+                    android:text="A.K. Shop"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <ImageButton
+                    android:contentDescription="@string/edit_button"
+                    android:id="@+id/shop_name_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_pencil"
+                    android:background="@color/Transparent"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/address_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Address"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="45dp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <TextView
+                    android:id="@+id/address_name_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    android:layout_toStartOf="@id/address_name_btn"
+                    android:layout_toEndOf="@id/address_heading"
+                    android:text="M P Nagar, Bhopal"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <ImageButton
+                    android:contentDescription="@string/edit_button"
+                    android:id="@+id/address_name_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_pencil"
+                    android:background="@color/Transparent"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/mob_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Contact"
+                    android:layout_marginEnd="50dp"
+                    android:textSize="18sp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <TextView
+                    android:id="@+id/mob_number_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    android:layout_toStartOf="@id/mob_edt_btn"
+                    android:layout_toEndOf="@id/mob_heading"
+                    android:text="8349263663"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <ImageButton
+                    android:id="@+id/mob_edt_btn"
+                    android:contentDescription="@string/edit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_pencil"
+                    android:background="@color/Transparent"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/email_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email ID"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="50dp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <TextView
+                    android:id="@+id/email_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    android:layout_toStartOf="@id/edit_email_btn"
+                    android:layout_toEndOf="@id/email_heading"
+                    android:text="shashwat111@gmail.com"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <ImageButton
+                    android:contentDescription="@string/edit_button"
+                    android:id="@+id/edit_email_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_pencil"
+                    android:background="@color/Transparent"/>
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/category_heading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Category"
+                    android:layout_marginEnd="45dp"
+                    android:textSize="18sp"
+                    android:layout_alignParentStart="true"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+                <TextView
+                    android:id="@+id/category_text_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:singleLine="true"
+                    android:layout_toLeftOf="@id/edit_name_btn"
+                    android:layout_toEndOf="@id/category_heading"
+                    android:text="grocery"
+                    android:textColor="@color/colorPrimaryDarkText" />
+
+
+                <ImageButton
+                    android:contentDescription="@string/edit_button"
+                    android:id="@+id/edit_name_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_pencil"
+                    android:background="@color/Transparent"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
