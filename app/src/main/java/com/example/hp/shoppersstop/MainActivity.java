@@ -34,6 +34,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hp.shoppersstop.R;
+import com.example.hp.shoppersstop.UserViewHolder;
 import com.example.hp.shoppersstop.database.ProductDbHelper;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.auth.AuthUI;
@@ -56,6 +58,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import UserViewHolder.example.hp.shoppersstop.SearchActivity;
+import UserViewHolder.example.hp.shoppersstop.database.ProductDbHelper;
 
 
 public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>,

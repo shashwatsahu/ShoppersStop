@@ -1,4 +1,4 @@
-package com.example.hp.shoppersstop.database;
+package UserViewHolder.example.hp.shoppersstop.database;
 
 import android.provider.BaseColumns;
 

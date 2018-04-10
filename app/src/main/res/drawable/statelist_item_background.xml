@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-<<<<<<< HEAD
+
     <item android:state_activated="true" android:drawable="@android:color/transparent"/>
-=======
+
     <item android:state_activated="true" android:drawable="@color/colorPrimary"/>
->>>>>>> 8e52c8efd215f38a569982cdb1a707fb342c3184
+
     <item android:drawable="@android:color/transparent"/>
 
 </selector>

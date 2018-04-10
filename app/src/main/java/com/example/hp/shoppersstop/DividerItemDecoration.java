@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.example.hp.shoppersstop.UserViewHolder;
+
 
 /**
  * Created by hp on 03-02-2018.

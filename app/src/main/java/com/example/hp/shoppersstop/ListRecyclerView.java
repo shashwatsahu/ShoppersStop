@@ -28,6 +28,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hp.shoppersstop.R;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
 import com.google.android.gms.tasks.Task;
@@ -37,6 +38,8 @@ import com.google.firebase.database.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import UserViewHolder.example.hp.shoppersstop.SendSelectedList;
 
 import static com.example.hp.shoppersstop.EnterList.uid;
 

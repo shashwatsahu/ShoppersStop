@@ -1,4 +1,4 @@
-package com.example.hp.shoppersstop.database;
+package UserViewHolder.example.hp.shoppersstop.database;
 
 import android.app.SearchManager;
 import android.content.ContentProvider;
@@ -11,8 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
-
-import com.example.hp.shoppersstop.SearchActivity;
 
 /**
  * Created by hp on 13-03-2018.
