@@ -5,13 +5,16 @@ import android.widget.ArrayAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
 
+import java.util.ArrayList;
+
 /**
  * Created by hp on 09-04-2018.
  */
 
 public class SearchAdapter extends ArrayAdapter<String> implements Filterable {
-    public SearchAdapter(Context context, int textViewResourceId) {
-        super(context, textViewResourceId);
+
+    public SearchAdapter(Context context, int textViewResourceId, ArrayList<String> arrayList) {
+        super(context, textViewResourceId, arrayList);
     }
 
     @Override
@@ -39,4 +42,9 @@ public class SearchAdapter extends ArrayAdapter<String> implements Filterable {
             }
         }
     };
+
+
+
+
+
 }

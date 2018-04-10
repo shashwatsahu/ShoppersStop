@@ -111,8 +111,10 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
             }
         });
 
-        final ArrayAdapter<List<String>> listArrayAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, arrayListBrand);
+        String[] arrays = (String[]) arrayListBrand.toArray();
+
+        final ArrayAdapter listArrayAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, arrays);
 
         final AutoCompleteTextView textView =
                   toolbar.findViewById(R.id.autocompletetextview);
@@ -141,7 +143,7 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
 
                if (arrayListBrand.size() != 0) {
                     // transform from json to your object
-                    listArrayAdapter.add();
+                    listArrayAdapter.add(arrayListBrand);
                 }
 
             }
