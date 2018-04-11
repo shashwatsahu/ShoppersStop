@@ -88,30 +88,36 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     private TextView userName, userID;
     private ImageView userProfile;
 
-    private SQLiteDatabase sqLiteDatabase;
+    private List<AuthUI.IdpConfig> providers;
 
+    private SQLiteDatabase sqLiteDatabase;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //Shimmer effect...
-//Making database object...
 
         Toast.makeText(this, "Welcomes U!", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "hello Im working!");
         //Firebase OAuth starts here...
         mAuth = FirebaseAuth.getInstance();
 
-        final List<AuthUI.IdpConfig> providers = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), new AuthUI.IdpConfig.FacebookBuilder().build(), new AuthUI.IdpConfig.GoogleBuilder().build());
+          providers = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), new AuthUI.IdpConfig.FacebookBuilder().build(), new AuthUI.IdpConfig.GoogleBuilder().build());
 
         // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
+        if(mAuth == null) {
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(),
+                    RC_SIGN_IN);
+
+        }
+        else {
+            updateUI(mAuth.getCurrentUser());
+
+        }
 
         //Firstly Iam creating an Instance of database this is the User's Id.
 
@@ -192,7 +198,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                         break;
                     case 12:
 
-                        if(mAuth.getUid() != null) {
+                        if(mAuth != null) {
                             AuthUI.getInstance()
                                     .signOut(MainActivity.this)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -220,15 +226,15 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             }
         });
 
-        if (mAuth.getCurrentUser() != null) {
-            updateUI(mAuth.getCurrentUser());
-        }
-
-        //Query data from database which is readable...
     }
+
+
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+        startActivityForResult(AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(), RC_SIGN_IN);
     }
 
     @Override
@@ -241,6 +247,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                updateUI(firebaseUser);
               //  Log.i(TAG, "OnCreateResult:" + firebaseUser.getUid());
                 // ...
             } else {
@@ -275,7 +282,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
 
             userName.setText(currentUser.getDisplayName());
             userID.setText(currentUser.getEmail());
-            Log.w(TAG, "UpdateUI:" + currentUser.getUid());
+            Log.w(TAG, "UpdateUI:" + currentUser.getUid()+ " " + currentUser.getEmail());
             //userProfile.setImageDrawable(Drawable.createFromPath(currentUser.getPhotoUrl().toString()));
         }
         else {
@@ -303,7 +310,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         });
     }
 
-    public void signIn (String email, String password) {
+  /*  public void signIn (String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -333,7 +340,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             boolean emailVerified = firebaseUser.isEmailVerified();
             String uid = firebaseUser.getUid();
         }
-    }
+    }*/
 
     public void getInputList(View view) {
         firebaseUser = mAuth.getCurrentUser();
@@ -349,7 +356,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 try {
-                    getActionBar().setTitle(mTitle);
+                    toolbar.setTitle(mTitle);
                 } catch (NullPointerException e) {
                     Log.i (TAG, " 1Exception :" + e);
                 }
@@ -359,7 +366,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onDrawerOpen(View view) {
                 super.onDrawerClosed(view);
                 try{
-                    getActionBar().setTitle(mDrawerTitle);
+                    toolbar.setTitle(mDrawerTitle);
                 } catch (Exception e) {
                     Log.i( TAG, "2Exception:" + e);
                 }
@@ -383,8 +390,10 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
         arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
         arrayList.add(new DrawerList("Legal", null));
-        arrayList.add(new DrawerList("Log Out",null));
-
+        if(mAuth != null)
+        arrayList.add(new DrawerList("Sign Out",null));
+        else
+        arrayList.add(new DrawerList("Sign In", null));
         return arrayList;
     }
 

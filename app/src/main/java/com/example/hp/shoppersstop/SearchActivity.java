@@ -32,25 +32,27 @@ import java.util.List;
  * Created by hp on 10-02-2018.
  */
 
-public class SearchActivity extends FragmentActivity/*implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemSelectedListener*/{
+public class SearchActivity extends FragmentActivity/*implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemSelectedListener*/ {
 
     private static final String TAG = "SearchActivity";
     private static final int SEARCH_QUERY_THRESHOLD = 2;
     // private static final String TAG = "SearchActivity";
-        private Spinner spinner, spinnerBrand, spinnerDepartment, spinnerPrice, spinnerWeight;
+    private Spinner spinner, spinnerBrand, spinnerDepartment, spinnerPrice, spinnerWeight;
 
-        private static final int PRODUCT = 0;
-        private static final int SHOP = 1;
+    private static final int PRODUCT = 0;
+    private static final int SHOP = 1;
 
-      //  private ArrayList<String> arrayListBrand;
+    private DatabaseReference databaseReference;
 
-        private Toolbar toolbarProduct;
-        //private ListView listView;
-        //private SimpleCursorAdapter simpleCursorAdapter;
+    //  private ArrayList<String> arrayListBrand;
 
-      //  private SQLiteDatabase sqLiteDatabase;
+    private Toolbar toolbarProduct;
+    //private ListView listView;
+    //private SimpleCursorAdapter simpleCursorAdapter;
+
+    //  private SQLiteDatabase sqLiteDatabase;
     //    private ProductDbHelper dbHelper;
-   // public SearchView searchView;
+    // public SearchView searchView;
 
     ArrayList<String> arrayListBrand;
 
@@ -60,11 +62,24 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
         setContentView(R.layout.search);
         //searchView = findViewById(R.id.search_view);
 
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("shopstore");
+
         Toolbar toolbar = findViewById(R.id.search_toolbar);
 
         arrayListBrand = new ArrayList<>();
 
-        DatabaseReference databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
+        arrayListBrand.add("amul");
+        arrayListBrand.add("bamul");
+        arrayListBrand.add("camul");
+        arrayListBrand.add("damul");
+        arrayListBrand.add("eamul");
+        arrayListBrand.add("famul");
+        arrayListBrand.add("gamul");
+        arrayListBrand.add("hamul");
+        arrayListBrand.add("iamul");
+        arrayListBrand.add("jamul");
+
+       /* DatabaseReference databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
         databaseReferenceBrand.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -94,50 +109,19 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
             public void onCancelled(DatabaseError databaseError) {
                 Log.i(TAG, "Brand name cancel!");
             }
-        });
+        });*/
 
-        if(arrayListBrand.size() != 0) {
+        String[] grocery = {"amul","amulths","amore","amere", "bread", "chocolate", "dinshaw", "eldl"};
 
-            String[] arrays = (String[]) arrayListBrand.toArray();
+        if (arrayListBrand.size() != 0) {
 
-            final ArrayAdapter listArrayAdapter = new ArrayAdapter<>(this,
-                    android.R.layout.simple_dropdown_item_1line, arrays);
+            final ArrayAdapter<String> listArrayAdapter = new ArrayAdapter<String>(this,
+                    android.R.layout.simple_dropdown_item_1line, grocery);
 
             final AutoCompleteTextView textView =
                     toolbar.findViewById(R.id.autocompletetextview);
 
             textView.setAdapter(listArrayAdapter);
-
-            textView.addTextChangedListener(new TextWatcher() {
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    // no need to do anything
-                }
-
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    if (((AutoCompleteTextView) textView).isPerformingCompletion()) {
-                        return;
-                    }
-                    if (charSequence.length() < 2) {
-                        return;
-                    }
-                    String query = charSequence.toString();
-                    listArrayAdapter.clear();
-
-                    List<String> data = new ArrayList<String>();
-                    data.add(query);
-
-
-                    if (arrayListBrand.size() != 0) {
-                        // transform from json to your object
-                        listArrayAdapter.add(arrayListBrand);
-                    }
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-                }
-            });
         }
         /*dbHelper = new ProductDbHelper(this);
 
@@ -288,7 +272,7 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
 
         arrayListBrand = new ArrayList<String>();
 
-       */ databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
+      */ //databaseReferenceBrand = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("grocery").child("brand");
         /*databaseReferenceDepartment = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product").child("department");
         databaseReferencePrice = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product");
         databaseReferenceWeight = FirebaseDatabase.getInstance().getReference().child("shopstore").child("product");
@@ -327,14 +311,14 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
 
         spinner = findViewById(R.id.spinner);*/
 
-        // TODO: 10-02-2018
+            // TODO: 10-02-2018
       /*  ArrayAdapter<CharSequence> arrayAdapter = ArrayAdapter.createFromResource(this, R.array.spinner_list, R.layout.support_simple_spinner_dropdown_item);
         arrayAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
         spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener)this);
            */
-       // handleIntent(getIntent());
-    }
+            // handleIntent(getIntent());
+        }
         //search suggestion...
 
     /*private void handleIntent(Intent intent) {
@@ -505,4 +489,5 @@ public class SearchActivity extends FragmentActivity/*implements LoaderManager.L
         }
     }*/
 
-}
+    }
+
