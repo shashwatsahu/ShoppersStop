@@ -34,6 +34,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
@@ -97,6 +98,12 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerList = findViewById(R.id.list_view);
+
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
+
         Toast.makeText(this, "Welcomes U!", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "hello Im working!");
         //Firebase OAuth starts here...
@@ -104,8 +111,10 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
 
           providers = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), new AuthUI.IdpConfig.FacebookBuilder().build(), new AuthUI.IdpConfig.GoogleBuilder().build());
 
+          Log.i(TAG, "Auth:" + mAuth);
+
         // Create and launch sign-in intent
-        if(mAuth == null) {
+        if(mAuth.getCurrentUser() == null) {
             startActivityForResult(
                     AuthUI.getInstance()
                             .createSignInIntentBuilder()
@@ -135,13 +144,22 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         });
 
         //mListTitles = getResources().getStringArray(R.array.navigation_list);
+
+        setAdapter();
+
+        //Navigation Drawer Button
+        ImageButton navButton = toolbar.findViewById(R.id.nav_button);
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.START);
+            }
+        });
+
+    }
+
+    private void setAdapter(){
         arrayList = getArrayList();
-
-        mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        mDrawerList = findViewById(R.id.list_view);
-
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         mDrawerList.setAdapter(new DrawerAdapter(this, arrayList));
 
@@ -162,7 +180,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
                 switch (position) {
                     case 0:
-                        getActionBarDrawerToggle();
+                        mDrawerToggle = getActionBarDrawerToggle();
                         break;
                     case 1:
                         startActivity(new Intent(MainActivity.this, ShopsCategoryActivity.class));
@@ -198,36 +216,31 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                         break;
                     case 12:
 
-                        if(mAuth != null) {
+                        if(mAuth.getCurrentUser() != null) {
                             AuthUI.getInstance()
                                     .signOut(MainActivity.this)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             // ...
                                             Log.i(TAG, "Log out:" + position);
-                                            Toast.makeText(MainActivity.this, "Position:" + position, Toast.LENGTH_SHORT).show();
                                             signIn();
 
                                         }
                                     });
                         }
+                        else
+                            startActivityForResult(
+                                    AuthUI.getInstance()
+                                            .createSignInIntentBuilder()
+                                            .setAvailableProviders(providers)
+                                            .build(),
+                                    RC_SIGN_IN);
                         break;
                 }
             }
         });
 
-
-        //Navigation Drawer Button
-        ImageButton navButton = toolbar.findViewById(R.id.nav_button);
-        navButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.START);
-            }
-        });
-
     }
-
 
     private void signIn() {
 
@@ -235,6 +248,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
                 .build(), RC_SIGN_IN);
+        setAdapter();
     }
 
     @Override
@@ -253,6 +267,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             } else {
 
                 Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                setAdapter();
                 // Sign in failed, check response for error code
                 // ...
             }
@@ -275,18 +290,25 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     //Below method updates UI by the valid user login
     public void updateUI(FirebaseUser currentUser){
 
+        userName = findViewById(R.id.name_id);
+        userID = findViewById(R.id.email_id);
+        userProfile = findViewById(R.id.user_profile);
+
         if(currentUser != null) {
-            userName = findViewById(R.id.name_id);
-            userID = findViewById(R.id.email_id);
-            userProfile = findViewById(R.id.user_profile);
 
             userName.setText(currentUser.getDisplayName());
             userID.setText(currentUser.getEmail());
+            if(currentUser.getPhotoUrl() != null)
+            Glide.with(this).load(currentUser.getPhotoUrl() != null ? currentUser.getPhotoUrl().toString() : "")
+                    .into(userProfile);
+            setAdapter();
             Log.w(TAG, "UpdateUI:" + currentUser.getUid()+ " " + currentUser.getEmail());
             //userProfile.setImageDrawable(Drawable.createFromPath(currentUser.getPhotoUrl().toString()));
         }
         else {
             Log.w(TAG, "Cannot update UI");
+            userName.setText(R.string.guest_user);
+            userID.setText("");
         }
 
     }
@@ -390,7 +412,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
         arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
         arrayList.add(new DrawerList("Legal", null));
-        if(mAuth != null)
+        if(mAuth.getCurrentUser() != null)
         arrayList.add(new DrawerList("Sign Out",null));
         else
         arrayList.add(new DrawerList("Sign In", null));
