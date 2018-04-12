@@ -400,17 +400,17 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     private ArrayList<DrawerList> getArrayList(){
 
         ArrayList arrayList = new ArrayList<DrawerList>();
-        arrayList.add(new DrawerList("Home",getDrawable(R.drawable.ic_home)));
+        arrayList.add(new DrawerList("Home",getDrawable(R.drawable.ic_home24)));
         arrayList.add(new DrawerList("Shop by Category",null));
-        arrayList.add(new DrawerList("Notifications",getDrawable(R.drawable.ic_bell)));
+        arrayList.add(new DrawerList("Notifications",getDrawable(R.drawable.ic_bell24)));
         arrayList.add(new DrawerList("Offer Zone",null));
-        arrayList.add(new DrawerList("My Rewards",getDrawable(R.drawable.ic_trophy)));
-        arrayList.add(new DrawerList("My Cart",getDrawable(R.drawable.ic_cart)));
-        arrayList.add(new DrawerList("My Wish List",getDrawable(R.drawable.ic_heart)));
+        arrayList.add(new DrawerList("My Rewards",getDrawable(R.drawable.ic_trophy24)));
+        arrayList.add(new DrawerList("My Cart",getDrawable(R.drawable.ic_cart24)));
+        arrayList.add(new DrawerList("My Wish List",getDrawable(R.drawable.ic_heart24)));
         arrayList.add(new DrawerList("My Orders", null));
-        arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_36dp)));
-        arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
-        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
+        arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_24dp)));
+        arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment24)));
+        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help24)));
         arrayList.add(new DrawerList("Legal", null));
         if(mAuth.getCurrentUser() != null)
         arrayList.add(new DrawerList("Sign Out",null));
