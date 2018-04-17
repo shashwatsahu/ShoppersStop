@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grey_background"
+    tools:context=".ChatActivity">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/chat_toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        android:background="@color/colorPrimary"/>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/messageRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/chat_toolBar"
+        android:layout_above="@id/linear_layout"/>
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true">
+
+        <ImageButton
+            android:id="@+id/addBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_add"
+            android:background="@android:color/white"
+
+            />
+
+        <EditText
+            android:background="@android:color/white"
+            android:id="@+id/message_edit_text"
+            android:layout_width="0dp"
+            android:hint="@string/type_a_message"
+            android:layout_height="55dp"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/sendBtn"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_send_button"
+            android:background="@android:color/white"
+            />
+
+
+
+
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

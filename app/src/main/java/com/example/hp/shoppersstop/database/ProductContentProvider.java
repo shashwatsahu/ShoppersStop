@@ -1,4 +1,4 @@
-package UserViewHolder.example.hp.shoppersstop.database;
+package com.example.hp.shoppersstop.database;
 
 import android.app.SearchManager;
 import android.content.ContentProvider;
@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.hp.shoppersstop.UserViewHolder;
 
 /**
  * Created by hp on 13-03-2018.
@@ -30,7 +32,7 @@ public class ProductContentProvider extends ContentProvider {
     public static final Uri CONTENT_URI_ID = Uri.parse(URL_ID);
 
     private static final String TAG = "ProductContentPorvider";
-    private ProductDbHelper productDbHelper;
+    private com.example.hp.shoppersstop.database.ProductDbHelper productDbHelper;
 
     private static final UriMatcher sUriMatcher= new UriMatcher(UriMatcher.NO_MATCH);
 
@@ -42,7 +44,7 @@ public class ProductContentProvider extends ContentProvider {
 
     @Override
     public boolean onCreate() {
-         productDbHelper = new ProductDbHelper(getContext());
+         productDbHelper = new com.example.hp.shoppersstop.database.ProductDbHelper(getContext());
         return true;
     }
 
@@ -78,7 +80,7 @@ public class ProductContentProvider extends ContentProvider {
             // return a cursor with appropriate data
             Log.i(TAG, "1 selection Args");
 
-            cursor = sqLiteDatabase.query(ProductContract.ProductEntry.TABLE_NAME, new String[] {ProductContract.ProductEntry.ID, ProductContract.ProductEntry.PRODUCT_NAME}, ProductContract.ProductEntry.PRODUCT_NAME + " LIKE ?", selectionArgs, null, null, null);
+            cursor = sqLiteDatabase.query(com.example.hp.shoppersstop.database.ProductContract.ProductEntry.TABLE_NAME, new String[] {com.example.hp.shoppersstop.database.ProductContract.ProductEntry.ID, com.example.hp.shoppersstop.database.ProductContract.ProductEntry.PRODUCT_NAME}, com.example.hp.shoppersstop.database.ProductContract.ProductEntry.PRODUCT_NAME + " LIKE ?", selectionArgs, null, null, null);
 
             cursor.moveToFirst();
 

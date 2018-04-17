@@ -1,5 +1,6 @@
 package com.example.hp.shoppersstop;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.database.Cursor;
@@ -34,10 +35,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hp.shoppersstop.R;
-import com.example.hp.shoppersstop.UserViewHolder;
+
 import com.example.hp.shoppersstop.database.ProductDbHelper;
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 
@@ -52,15 +51,18 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
-import com.example.hp.shoppersstop.database.ProductContract.ProductEntry;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import UserViewHolder.example.hp.shoppersstop.SearchActivity;
-import UserViewHolder.example.hp.shoppersstop.database.ProductDbHelper;
+import com.example.hp.shoppersstop.database.ProductDbHelper;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 
 public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>,
@@ -169,13 +171,33 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                         getActionBarDrawerToggle();
                         break;
                     case 1:
-                        startActivity(new Intent(MainActivity.this, ShopsCategoryActivity.class));
+                        Dexter.withActivity(MainActivity.this)
+                                .withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                                .withListener(new PermissionListener() {
+                                    @Override
+                                    public void onPermissionGranted(PermissionGrantedResponse response) {
+                                        startActivity(new Intent(MainActivity.this, ShopsCategoryActivity.class));
+
+                                    }
+
+                                    @Override
+                                    public void onPermissionDenied(PermissionDeniedResponse response) {
+                                        Toast.makeText(MainActivity.this, "Permission denied", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                    @Override
+                                    public void onPermissionRationaleShouldBeShown(PermissionRequest permission, PermissionToken token) {
+
+                                        token.continuePermissionRequest();
+                                    }
+                                }).check();
                         break;
                     case 2:
-
+                            startActivity(new Intent(MainActivity.this,NearbyShopActivity.class));
                         break;
 
                     case 3:
+                        startActivity(new Intent(MainActivity.this,MyChatsActivity.class));
                         break;
                     case 4:
                         break;

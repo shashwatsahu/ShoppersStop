@@ -29,8 +29,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-import UserViewHolder.example.hp.shoppersstop.ListRecyclerView;
-import UserViewHolder.example.hp.shoppersstop.MainActivity;
+
 
 import static java.nio.file.Paths.get;
 

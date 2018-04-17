@@ -5,21 +5,30 @@ public class ShopModel {
     private String shopName;
     private String displayPhotoUrl;
     private String shopContactNumber;
-    private String distance;
     private String openTime;
     private String closeTime;
     private String address;
     private int ratings;
+    private boolean isAuthenticated;
+    private boolean isDeliveryAvailable;
+    private long online;
 
-    public ShopModel(String shopName, String displayPhotoUrl, String shopContactNumber, String distance, String openTime, String closeTime, String address, int ratings) {
+
+    public ShopModel(String shopName, String displayPhotoUrl, String shopContactNumber, String openTime, String closeTime, String address, int ratings, boolean isAuthenticated, boolean isDeliveryAvailable,Long online) {
         this.shopName = shopName;
         this.displayPhotoUrl = displayPhotoUrl;
         this.shopContactNumber = shopContactNumber;
-        this.distance = distance;
         this.openTime = openTime;
         this.closeTime = closeTime;
         this.address = address;
         this.ratings = ratings;
+        this.isAuthenticated = isAuthenticated;
+        this.isDeliveryAvailable = isDeliveryAvailable;
+        this.online = online;
+    }
+
+
+    public ShopModel() {
     }
 
     public String getShopName() {
@@ -47,13 +56,6 @@ public class ShopModel {
     }
 
 
-    public String getDistance() {
-        return distance;
-    }
-
-    public void setDistance(String distance) {
-        this.distance = distance;
-    }
 
     public String getOpenTime() {
         return openTime;
@@ -85,5 +87,30 @@ public class ShopModel {
 
     public void setRatings(int ratings) {
         this.ratings = ratings;
+    }
+
+
+    public boolean isAuthenticated() {
+        return isAuthenticated;
+    }
+
+    public void setAuthenticated(boolean authenticated) {
+        isAuthenticated = authenticated;
+    }
+
+    public boolean isDeliveryAvailable() {
+        return isDeliveryAvailable;
+    }
+
+    public void setDeliveryAvailable(boolean deliveryAvailable) {
+        isDeliveryAvailable = deliveryAvailable;
+    }
+
+    public Long getOnline() {
+        return online;
+    }
+
+    public void setOnline(Long online) {
+        this.online = online;
     }
 }

@@ -1,4 +1,4 @@
-package UserViewHolder.example.hp.shoppersstop.database;
+package com.example.hp.shoppersstop.database;
 
 import android.app.SearchManager;
 import android.content.Context;

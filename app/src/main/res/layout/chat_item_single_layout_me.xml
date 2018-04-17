@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content" android:layout_height="wrap_content"
+    android:background="@drawable/background_for_chat_bubble_me"
+    android:layout_marginLeft="30dp"
+    android:layout_marginTop="8dp"
+    android:padding="7dp"
+    android:layout_marginRight="4dp">
+
+
+    <TextView
+        android:id="@+id/message_box_textview_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:text="default message"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        />
+
+    <TextView
+        android:id="@+id/msg_time_me"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:text="00:00"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:textSize="13sp"/>
+
+</RelativeLayout>

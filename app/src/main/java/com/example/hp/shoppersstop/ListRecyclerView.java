@@ -39,7 +39,6 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-import UserViewHolder.example.hp.shoppersstop.SendSelectedList;
 
 import static com.example.hp.shoppersstop.EnterList.uid;
 
