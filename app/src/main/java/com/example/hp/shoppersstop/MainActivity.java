@@ -35,8 +35,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+<<<<<<< HEAD
 
 import com.example.hp.shoppersstop.database.ProductDbHelper;
+=======
+import com.bumptech.glide.Glide;
+import com.facebook.shimmer.ShimmerFrameLayout;
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 
@@ -56,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+<<<<<<< HEAD
 import com.example.hp.shoppersstop.database.ProductDbHelper;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.PermissionToken;
@@ -64,6 +70,8 @@ import com.karumi.dexter.listener.PermissionGrantedResponse;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.single.PermissionListener;
 
+=======
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
 
 public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>,
         RecyclerView.OnItemTouchListener, View.OnClickListener, ActionMode.Callback{
@@ -97,33 +105,44 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     private TextView userName, userID;
     private ImageView userProfile;
 
-    private SQLiteDatabase sqLiteDatabase;
-    private ProductDbHelper productDbHelper;
+    private List<AuthUI.IdpConfig> providers;
 
+    private SQLiteDatabase sqLiteDatabase;
+    private Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Shimmer effect...
-//Making database object...
+        mTitle = mDrawerTitle = getTitle();
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerList = findViewById(R.id.list_view);
 
-        productDbHelper = new ProductDbHelper(this);
+        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         Toast.makeText(this, "Welcomes U!", Toast.LENGTH_SHORT).show();
         Log.i(TAG, "hello Im working!");
         //Firebase OAuth starts here...
         mAuth = FirebaseAuth.getInstance();
 
-        final List<AuthUI.IdpConfig> providers = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), new AuthUI.IdpConfig.FacebookBuilder().build(), new AuthUI.IdpConfig.GoogleBuilder().build());
+          providers = Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build(), new AuthUI.IdpConfig.FacebookBuilder().build(), new AuthUI.IdpConfig.GoogleBuilder().build());
+
+          Log.i(TAG, "Auth:" + mAuth);
 
         // Create and launch sign-in intent
-        startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setAvailableProviders(providers)
-                        .build(),
-                RC_SIGN_IN);
+        if(mAuth.getCurrentUser() == null) {
+            startActivityForResult(
+                    AuthUI.getInstance()
+                            .createSignInIntentBuilder()
+                            .setAvailableProviders(providers)
+                            .build(),
+                    RC_SIGN_IN);
+
+        }
+        else {
+            updateUI(mAuth.getCurrentUser());
+
+        }
 
         //Firstly Iam creating an Instance of database this is the User's Id.
 
@@ -141,13 +160,22 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         });
 
         //mListTitles = getResources().getStringArray(R.array.navigation_list);
+
+        setAdapter();
+
+        //Navigation Drawer Button
+        ImageButton navButton = toolbar.findViewById(R.id.nav_button);
+        navButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDrawerLayout.openDrawer(Gravity.START);
+            }
+        });
+
+    }
+
+    private void setAdapter(){
         arrayList = getArrayList();
-
-        mTitle = mDrawerTitle = getTitle();
-        mDrawerLayout = findViewById(R.id.drawer_layout);
-        mDrawerList = findViewById(R.id.list_view);
-
-        mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
         mDrawerList.setAdapter(new DrawerAdapter(this, arrayList));
 
@@ -168,7 +196,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
                 switch (position) {
                     case 0:
-                        getActionBarDrawerToggle();
+                        mDrawerToggle = getActionBarDrawerToggle();
                         break;
                     case 1:
                         Dexter.withActivity(MainActivity.this)
@@ -224,43 +252,39 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                         break;
                     case 12:
 
-                        if(mAuth.getUid() != null) {
+                        if(mAuth.getCurrentUser() != null) {
                             AuthUI.getInstance()
                                     .signOut(MainActivity.this)
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         public void onComplete(@NonNull Task<Void> task) {
                                             // ...
                                             Log.i(TAG, "Log out:" + position);
-                                            Toast.makeText(MainActivity.this, "Position:" + position, Toast.LENGTH_SHORT).show();
                                             signIn();
 
                                         }
                                     });
                         }
+                        else
+                            startActivityForResult(
+                                    AuthUI.getInstance()
+                                            .createSignInIntentBuilder()
+                                            .setAvailableProviders(providers)
+                                            .build(),
+                                    RC_SIGN_IN);
                         break;
                 }
             }
         });
 
-
-        //Navigation Drawer Button
-        ImageButton navButton = toolbar.findViewById(R.id.nav_button);
-        navButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawerLayout.openDrawer(Gravity.START);
-            }
-        });
-
-        if (mAuth.getCurrentUser() != null) {
-            updateUI(mAuth.getCurrentUser());
-        }
-
-        //Query data from database which is readable...
     }
+
     private void signIn() {
-        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-        startActivityForResult(signInIntent, RC_SIGN_IN);
+
+        startActivityForResult(AuthUI.getInstance()
+                .createSignInIntentBuilder()
+                .setAvailableProviders(providers)
+                .build(), RC_SIGN_IN);
+        setAdapter();
     }
 
     @Override
@@ -273,11 +297,13 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                updateUI(firebaseUser);
               //  Log.i(TAG, "OnCreateResult:" + firebaseUser.getUid());
                 // ...
             } else {
 
                 Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                setAdapter();
                 // Sign in failed, check response for error code
                 // ...
             }
@@ -300,18 +326,25 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     //Below method updates UI by the valid user login
     public void updateUI(FirebaseUser currentUser){
 
+        userName = findViewById(R.id.name_id);
+        userID = findViewById(R.id.email_id);
+        userProfile = findViewById(R.id.user_profile);
+
         if(currentUser != null) {
-            userName = findViewById(R.id.name_id);
-            userID = findViewById(R.id.email_id);
-            userProfile = findViewById(R.id.user_profile);
 
             userName.setText(currentUser.getDisplayName());
             userID.setText(currentUser.getEmail());
-            Log.w(TAG, "UpdateUI:" + currentUser.getUid());
+            if(currentUser.getPhotoUrl() != null)
+            Glide.with(this).load(currentUser.getPhotoUrl() != null ? currentUser.getPhotoUrl().toString() : "")
+                    .into(userProfile);
+            setAdapter();
+            Log.w(TAG, "UpdateUI:" + currentUser.getUid()+ " " + currentUser.getEmail());
             //userProfile.setImageDrawable(Drawable.createFromPath(currentUser.getPhotoUrl().toString()));
         }
         else {
             Log.w(TAG, "Cannot update UI");
+            userName.setText(R.string.guest_user);
+            userID.setText("");
         }
 
     }
@@ -327,15 +360,17 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                     updateUI(user);
                 } else {
                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                    Toast.makeText(MainActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "Authentication Failed", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
             }
         });
     }
 
-    public void signIn (String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+  /*  public void signIn (String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()) {
@@ -345,7 +380,8 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
                 }
                 else {
                     Log.w (TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(MainActivity.this, "Authentication Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this,
+                            "Authentication Failed", Toast.LENGTH_SHORT).show();
                     updateUI(null);
                 }
             }
@@ -362,7 +398,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             boolean emailVerified = firebaseUser.isEmailVerified();
             String uid = firebaseUser.getUid();
         }
-    }
+    }*/
 
     public void getInputList(View view) {
         firebaseUser = mAuth.getCurrentUser();
@@ -372,12 +408,13 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     }
 
     private ActionBarDrawerToggle getActionBarDrawerToggle(){
-        return new ActionBarDrawerToggle(this, mDrawerLayout, R.string.drawer_open, R.string.drawer_close) {
+        return new ActionBarDrawerToggle(this, mDrawerLayout,
+                R.string.drawer_open, R.string.drawer_close) {
 
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 try {
-                    getActionBar().setTitle(mTitle);
+                    toolbar.setTitle(mTitle);
                 } catch (NullPointerException e) {
                     Log.i (TAG, " 1Exception :" + e);
                 }
@@ -387,7 +424,7 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             public void onDrawerOpen(View view) {
                 super.onDrawerClosed(view);
                 try{
-                    getActionBar().setTitle(mDrawerTitle);
+                    toolbar.setTitle(mDrawerTitle);
                 } catch (Exception e) {
                     Log.i( TAG, "2Exception:" + e);
                 }
@@ -399,20 +436,22 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
     private ArrayList<DrawerList> getArrayList(){
 
         ArrayList arrayList = new ArrayList<DrawerList>();
-        arrayList.add(new DrawerList("Home",getDrawable(R.drawable.ic_home)));
+        arrayList.add(new DrawerList("Home",getDrawable(R.drawable.ic_home24)));
         arrayList.add(new DrawerList("Shop by Category",null));
-        arrayList.add(new DrawerList("Notifications",getDrawable(R.drawable.ic_bell)));
+        arrayList.add(new DrawerList("Notifications",getDrawable(R.drawable.ic_bell24)));
         arrayList.add(new DrawerList("Offer Zone",null));
-        arrayList.add(new DrawerList("My Rewards",getDrawable(R.drawable.ic_trophy)));
-        arrayList.add(new DrawerList("My Cart",getDrawable(R.drawable.ic_cart)));
-        arrayList.add(new DrawerList("My Wish List",getDrawable(R.drawable.ic_heart)));
+        arrayList.add(new DrawerList("My Rewards",getDrawable(R.drawable.ic_trophy24)));
+        arrayList.add(new DrawerList("My Cart",getDrawable(R.drawable.ic_cart24)));
+        arrayList.add(new DrawerList("My Wish List",getDrawable(R.drawable.ic_heart24)));
         arrayList.add(new DrawerList("My Orders", null));
-        arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_36dp)));
-        arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
-        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
+        arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_24dp)));
+        arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment24)));
+        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help24)));
         arrayList.add(new DrawerList("Legal", null));
-        arrayList.add(new DrawerList("Log Out",null));
-
+        if(mAuth.getCurrentUser() != null)
+        arrayList.add(new DrawerList("Sign Out",null));
+        else
+        arrayList.add(new DrawerList("Sign In", null));
         return arrayList;
     }
 

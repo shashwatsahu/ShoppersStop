@@ -12,8 +12,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.hp.shoppersstop.EditProfile;
 import com.example.hp.shoppersstop.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,7 +42,10 @@ public class Customer_Profile_Main_Page extends AppCompatActivity {
     CardView about_us_cv;
     CardView improve_us_cv;
     TextView customer_name;
+    TextView customer_mail_id;
 
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
 
 
     @Override
@@ -46,8 +53,12 @@ public class Customer_Profile_Main_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_profile_main_page);
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
+
         mProfilePhoto = findViewById(R.id.profilePhoto);
 
+        customer_mail_id = findViewById(R.id.customer_mail_id);
         customer_name = findViewById(R.id.customer_name);
         edit_profile_cv = findViewById(R.id.edit_profile_card_view);
         my_coupons_cv = findViewById(R.id.my_coupons_card_view);
@@ -57,6 +68,14 @@ public class Customer_Profile_Main_Page extends AppCompatActivity {
         about_us_cv = findViewById(R.id.about_us_cv);
         terms_of_service_cv = findViewById(R.id.terms_of_service_cv);
 
+        if(firebaseUser != null) {
+            customer_name.setText(firebaseUser.getDisplayName());
+            customer_mail_id.setText(firebaseUser.getEmail());
+            if (firebaseUser.getPhotoUrl() != null)
+                Glide.with(this).load(firebaseUser.getPhotoUrl() != null ? firebaseUser.getPhotoUrl().toString() : "")
+                        .into(mProfilePhoto);
+
+        }
 
         mProfilePhoto.setOnClickListener(new View.OnClickListener(){
 

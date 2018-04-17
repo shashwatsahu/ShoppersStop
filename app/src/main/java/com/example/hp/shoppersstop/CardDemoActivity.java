@@ -9,12 +9,15 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.example.hp.shoppersstop.R;
 
 import java.util.List;
 
 
 
+=======
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
 /**
  * Created by hp on 03-02-2018.
  */

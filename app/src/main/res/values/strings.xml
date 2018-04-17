@@ -161,7 +161,11 @@
     <string name="call_text">CALL</string>
     <string name="cancel_text">CANCEL</string>
     <string name="sendlist">Send List</string>
+<<<<<<< HEAD
     <string name="title_activity_maps">Map</string>
     <string name="type_a_message">Type a message...</string>
     <string name="display_name">Display name</string>
+=======
+    <string name="guest_user">Guest User</string>
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
 </resources>

@@ -79,8 +79,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+<<<<<<< HEAD
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 
+=======
+public class NearbyShopActivity extends AppCompatActivity implements GeoQueryEventListener{
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
 
 public class NearbyShopActivity extends AppCompatActivity implements GeoQueryEventListener {
 

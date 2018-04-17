@@ -33,7 +33,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
 public class SendSelectedList extends AppCompatActivity implements View.OnClickListener
         , RecyclerView.OnItemTouchListener{
 

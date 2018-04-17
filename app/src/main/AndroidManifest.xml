@@ -55,17 +55,13 @@
             android:label="profile activity"
             android:theme="@style/AppTheme" />
 
-        <provider
-            android:name=".database.ProductContentProvider"
-            android:authorities="com.example.hp.shoppersstop"
-            android:exported="false" />
-
         <activity android:name=".FavouriteListActivity" />
         <activity
             android:name=".SendSelectedList"
             android:parentActivityName=".ListRecyclerView"
             android:theme="@style/AppTheme" />
         <activity android:name=".EditProfile" />
+<<<<<<< HEAD
         <activity android:name=".NearbyShopActivity" />
         <activity android:name=".Location_Permission_Required" />
         <activity android:name=".FilterShopActivity" />
@@ -89,6 +85,18 @@
             android:label="@string/title_activity_maps" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".MyChatsActivity"></activity>
+=======
+        <activity android:name=".SearchActivity" />
+        <activity android:name=".CardDemoActivity" />
+        <activity android:name=".Customer_Profile_Main_Page" />
+        <activity android:name=".FilterShopActivity" />
+        <activity android:name=".ImproveUsActivity" />
+        <activity android:name=".Location_Permission_Required" />
+        <activity android:name=".MapsActivity" />
+        <activity android:name=".NearbyShopActivity" />
+        <activity android:name=".Shop_full_profile" />
+        <activity android:name=".TermsAndConditions" />
+>>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
     </application>
 
 </manifest>

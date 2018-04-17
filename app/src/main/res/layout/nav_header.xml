@@ -49,7 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="@color/ListPrimary"
+        android:background="@color/colorPrimaryText"
         android:divider="@color/colorPrimaryText"
         android:dividerHeight="1dp"/>
 
