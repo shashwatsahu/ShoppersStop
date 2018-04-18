@@ -25,12 +25,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Map;
 
-<<<<<<< HEAD
+
 
 
 import static java.nio.file.Paths.get;
-=======
->>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
+
 
 /**
  * Created by hp on 11-02-2018.

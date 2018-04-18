@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:paddingTop="4dp"
         android:contentDescription="@string/list_image"
-        android:src="@drawable/ic_home24" />
+        android:src="@drawable/ic_home" />
 
     <TextView
         android:id="@+id/text"

@@ -83,6 +83,6 @@ public class FetchSearchSuggestion extends AsyncTask<String, Void, Cursor> {
 
         SearchActivity searchActivity = new SearchActivity();
 
-        searchActivity.searchView.getSuggestionsAdapter().changeCursor(result);
+       // searchActivity.searchView.getSuggestionsAdapter().changeCursor(result);
     }
 }

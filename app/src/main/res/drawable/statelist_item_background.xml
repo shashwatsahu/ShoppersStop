@@ -6,10 +6,6 @@
 
     <item android:state_activated="true" android:drawable="@color/colorPrimary"/>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0682d8328fa403c3e4ceb503136c603eb0372aae
     <item android:drawable="@android:color/transparent"/>
 
 </selector>

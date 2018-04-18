@@ -3,6 +3,8 @@ package com.example.hp.shoppersstop;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -30,6 +32,7 @@ import static com.example.hp.shoppersstop.NearbyShopActivity.APP_NAME;
 import static com.example.hp.shoppersstop.NearbyShopActivity.SHOP_DISPLAY_URL;
 import static com.example.hp.shoppersstop.NearbyShopActivity.SHOP_NAME;
 
+
 public class MyChatsCustomAdapter extends RecyclerView.Adapter<MyChatsCustomAdapter.MyChatsViewHolder>{
 
     private List<DataSnapshot> mChats;
@@ -50,6 +53,7 @@ public class MyChatsCustomAdapter extends RecyclerView.Adapter<MyChatsCustomAdap
         return new MyChatsViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.CUPCAKE)
     @Override
     public void onBindViewHolder(final MyChatsViewHolder holder, int position) {
 
