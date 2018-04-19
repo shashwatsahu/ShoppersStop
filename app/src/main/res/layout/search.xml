@@ -28,6 +28,7 @@
             android:id="@+id/spinner"
             android:popupTheme="@style/AppTheme"
             android:layout_alignParentStart="true"
+            android:layout_marginTop="14dp"
             android:paddingTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -38,13 +39,20 @@
             android:orientation="horizontal">
 
             <AutoCompleteTextView
-                android:id="@+id/autocompletetextview"
+                android:id="@+id/search_auto_edt"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
                 android:layout_weight="1"
+                android:paddingTop="4dp"
+                android:paddingStart="12dp"
+                android:hint="@string/search_suggestion"
+                android:paddingEnd="0dp"
+                android:paddingBottom="4dp"
+                android:layout_margin="8dp"
+                android:background="@drawable/search_edit_text"
                 android:layout_marginStart="@dimen/card_view_padding"
                 tools:ignore="LabelFor"/>
+
 
             <ImageButton
                 android:id="@+id/search_image_btn"
@@ -111,8 +119,9 @@
 
         </android.support.v7.widget.Toolbar>
 
-    <ListView
-    android:id="@+id/list"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/search_rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>

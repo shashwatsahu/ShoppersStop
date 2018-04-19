@@ -30,10 +30,10 @@
 
     </style>
 
-        <style name="RatingBarTheme" parent="Theme.AppCompat">
+      <!--  <style name="RatingBarTheme" parent="Theme.AppCompat">
 
             <item name="colorControlNormal">@color/colorGrey</item>
             <item name="colorControlActivated">@color/color_for_star</item>
-        </style>
+        </style>-->
 
 </resources>

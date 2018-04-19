@@ -161,4 +161,5 @@
     <string name="cancel_text">CANCEL</string>
     <string name="sendlist">Send List</string>
     <string name="guest_user">Guest User</string>
+    <string name="search_suggestion">Search...</string>
 </resources>

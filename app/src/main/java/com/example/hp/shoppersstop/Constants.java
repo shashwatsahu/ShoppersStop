@@ -19,4 +19,10 @@ public class Constants {
 
     public static String NAME_INNER_CONTAINER = "innerContainer";
 
+    public static final String PRODUCT_NAME_KEY = "productname" ;
+    public static final String PRODUCT_BRAND_KEY = "productbrand";
+    public static final String PRODUCT_PRICE_KEY = "productprice";
+    public static final String PRODUCT_WEIGHT_KEY = "productweight";
+
+
 }

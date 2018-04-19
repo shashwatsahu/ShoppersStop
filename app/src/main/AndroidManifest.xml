@@ -60,7 +60,7 @@
                     android:theme="@style/AppTheme"/>
 
         <activity android:name=".EditProfile" />
-        <activity android:name=".SearchActivity" />
+        <activity android:name=".search.SearchActivity" />
         <activity android:name=".CardDemoActivity" />
         <activity android:name=".Customer_Profile_Main_Page" />
         <activity android:name=".FilterShopActivity" />
