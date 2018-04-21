@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="80dp"
+    android:padding="8dp">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/chats_profile_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_user"/>
+
+
+    <TextView
+        android:id="@+id/chats_profile_name"
+        android:layout_width="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/chats_profile_photo"
+        android:layout_marginLeft="15dp"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:text="User name"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/chats_last_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/chats_profile_name"
+        android:layout_toRightOf="@+id/chats_profile_photo"
+        android:textSize="16sp"
+        android:maxLines="1"
+        android:layout_marginTop="5dp"
+        android:layout_alignParentBottom="true"
+        android:text="this is default message"
+        android:layout_marginLeft="15dp"/>
+
+    <TextView
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="5dp"
+        android:text="00:00"
+        android:id="@+id/chats_last_message_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

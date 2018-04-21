@@ -23,6 +23,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.0.0-beta1'
+    implementation "com.android.support:support-compat:26.0.0"
+
     implementation 'com.android.support:appcompat-v7:26.0.2'
     implementation "com.android.support:support-compat:26.0.2"
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -36,13 +39,11 @@ dependencies {
 
 
     implementation 'com.google.firebase:firebase-database:11.8.0'
-    api 'com.facebook.android:facebook-android-sdk:4.27.0'
+    implementation 'com.facebook.android:facebook-android-sdk:4.27.0'
     implementation 'com.google.android.gms:play-services-auth:11.8.0'
     implementation 'com.firebaseui:firebase-ui:0.4.3'
     implementation 'com.google.firebase:firebase-core:11.8.0'
-    api 'com.facebook.shimmer:shimmer:0.1.0@aar'
-
-    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'

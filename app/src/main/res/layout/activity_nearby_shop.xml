@@ -54,13 +54,21 @@
 
 
     <android.support.design.widget.FloatingActionButton
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:id="@+id/filter_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:fabSize="normal"
+        android:elevation="6dp"
+        android:backgroundTint="@color/text_color_for_profile_top"
+        android:theme="@style/Widget.Design.FloatingActionButton"
+        android:src="@drawable/ic_filter_tool_black_shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.92"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.92" />
+        app:layout_constraintVertical_bias="0.92"
+        android:onClick="filterButtonClick"/>
 
 </android.support.constraint.ConstraintLayout>

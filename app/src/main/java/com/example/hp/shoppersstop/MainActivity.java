@@ -1,8 +1,14 @@
 package com.example.hp.shoppersstop;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
+import android.provider.BaseColumns;
 import android.support.annotation.NonNull;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -13,6 +19,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -29,8 +36,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
+import com.example.hp.shoppersstop.database.ProductDbHelper;
+
 import com.bumptech.glide.Glide;
-import com.example.hp.shoppersstop.search.SearchActivity;
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 
@@ -49,6 +61,16 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+
+import com.example.hp.shoppersstop.database.ProductDbHelper;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
+
 
 
 public class MainActivity extends  AppCompatActivity implements LoaderManager.LoaderCallbacks<List<ListItem>>,
@@ -87,6 +109,19 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
 
     private SQLiteDatabase sqLiteDatabase;
     private Intent intent;
+
+    //===================Action card view
+
+    private CardView main_nearby_shop_card_view;
+    private CardView main_chats_card_view;
+    private CardView main_offers_card_view;
+    private CardView main_help_card_view;
+
+
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -173,42 +208,38 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
             @Override
             public void onItemClick(final AdapterView<?> parent, View view, final int position, long id) {
                 switch (position) {
+
                     case 0:
                         mDrawerToggle = getActionBarDrawerToggle();
-                        break;
+                            break;
+
                     case 1:
-                        startActivity(new Intent(MainActivity.this, ShopsCategoryActivity.class));
+                        startActivity(new Intent(MainActivity.this,MyChatsActivity.class));
                         break;
                     case 2:
-
                         break;
-
                     case 3:
                         break;
                     case 4:
-                        break;
-                    case 5:
-                        break;
-                    case 6:
 
                         break;
-                    case 7:
+                    case 5:
                         startActivity(new Intent(MainActivity.this, PendingOrderActivity.class));
                         break;
-                    case 8:
+                    case 6:
                         startActivity(new Intent(MainActivity.this, Customer_Profile_Main_Page.class));
                         break;
-                    case 9:
+                    case 7:
                         startActivity(new Intent(MainActivity.this, ImproveUsActivity.class));
                         break;
-                    case 10:
+                    case 8:
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         break;
-                    case 11:
+                    case 9:
                         startActivity(new Intent(MainActivity.this, TermsAndConditions.class));
 
                         break;
-                    case 12:
+                    case 10:
 
                         if(mAuth.getCurrentUser() != null) {
                             AuthUI.getInstance()
@@ -326,37 +357,6 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         });
     }
 
-  /*  public void signIn (String email, String password) {
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()) {
-                    Log.d(TAG, "signInWithEmail:success");
-                     firebaseUser = mAuth.getCurrentUser();
-                    updateUI(firebaseUser);
-                }
-                else {
-                    Log.w (TAG, "signInWithEmail:failure", task.getException());
-                    Toast.makeText(MainActivity.this,
-                            "Authentication Failed", Toast.LENGTH_SHORT).show();
-                    updateUI(null);
-                }
-            }
-        });
-    }
-
-    public void getCurrentUser() {
-        firebaseUser = mAuth.getCurrentUser();
-        if(firebaseUser != null) {
-            String name = firebaseUser.getDisplayName();
-            String email = firebaseUser.getEmail();
-            Uri photoUri = firebaseUser.getPhotoUrl();
-
-            boolean emailVerified = firebaseUser.isEmailVerified();
-            String uid = firebaseUser.getUid();
-        }
-    }*/
 
     public void getInputList(View view) {
         firebaseUser = mAuth.getCurrentUser();
@@ -391,25 +391,23 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
         };
     }
 
+
     private ArrayList<DrawerList> getArrayList(){
 
         ArrayList arrayList = new ArrayList<DrawerList>();
-        arrayList.add(new DrawerList("Home",getDrawable(R.drawable.ic_home24)));
+        arrayList.add(new DrawerList("Home",getDrawable(R.drawable.ic_home)));
         arrayList.add(new DrawerList("Shop by Category",null));
-        arrayList.add(new DrawerList("Notifications",getDrawable(R.drawable.ic_bell24)));
+        arrayList.add(new DrawerList("Notifications",getDrawable(R.drawable.ic_bell)));
         arrayList.add(new DrawerList("Offer Zone",null));
-        arrayList.add(new DrawerList("My Rewards",getDrawable(R.drawable.ic_trophy24)));
-        arrayList.add(new DrawerList("My Cart",getDrawable(R.drawable.ic_cart24)));
-        arrayList.add(new DrawerList("My Wish List",getDrawable(R.drawable.ic_heart24)));
-        arrayList.add(new DrawerList("My Orders", null));
-        arrayList.add(new DrawerList("My Account", getDrawable(R.drawable.ic_account_circle_grey_24dp)));
-        arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment24)));
-        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help24)));
+        arrayList.add(new DrawerList("My Rewards",getDrawable(R.drawable.ic_trophy)));
+        arrayList.add(new DrawerList("My Account",null));
+        arrayList.add(new DrawerList("Send Feedback",getDrawable(R.drawable.ic_comment)));
+        arrayList.add(new DrawerList("About Us", getDrawable(R.drawable.ic_help)));
         arrayList.add(new DrawerList("Legal", null));
         if(mAuth.getCurrentUser() != null)
-        arrayList.add(new DrawerList("Sign Out",null));
+            arrayList.add(new DrawerList("Sign Out",getDrawable(R.drawable.out_sign)));
         else
-        arrayList.add(new DrawerList("Sign In", null));
+            arrayList.add(new DrawerList("Sign In", getDrawable(R.drawable.sign_in)));
         return arrayList;
     }
 
@@ -494,3 +492,35 @@ public class MainActivity extends  AppCompatActivity implements LoaderManager.Lo
 
 
 
+
+  /*  public void signIn (String email, String password) {
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()) {
+                    Log.d(TAG, "signInWithEmail:success");
+                     firebaseUser = mAuth.getCurrentUser();
+                    updateUI(firebaseUser);
+                }
+                else {
+                    Log.w (TAG, "signInWithEmail:failure", task.getException());
+                    Toast.makeText(MainActivity.this,
+                            "Authentication Failed", Toast.LENGTH_SHORT).show();
+                    updateUI(null);
+                }
+            }
+        });
+    }
+
+    public void getCurrentUser() {
+        firebaseUser = mAuth.getCurrentUser();
+        if(firebaseUser != null) {
+            String name = firebaseUser.getDisplayName();
+            String email = firebaseUser.getEmail();
+            Uri photoUri = firebaseUser.getPhotoUrl();
+
+            boolean emailVerified = firebaseUser.isEmailVerified();
+            String uid = firebaseUser.getUid();
+        }
+    }*/

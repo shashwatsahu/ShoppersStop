@@ -69,10 +69,10 @@
         <item>Maximum</item>
     </string-array>
 
-   <string-array name="bakery">
-       <item>amul</item>
-       <item>patanjali</item>
-   </string-array>
+    <string-array name="bakery">
+        <item>amul</item>
+        <item>patanjali</item>
+    </string-array>
 
     <string-array name="grocery">
         <item>cadbury</item>
@@ -140,7 +140,6 @@
     <string name="suggestion_heading">Have some suggestions in your mind?</string>
 
 
-
     <string name="need_location_permission">Location permission Required</string>
     <string name="go_to_settings">Go to Settings</string>
     <string name="allow_location_access">Allow location access</string>
@@ -148,9 +147,11 @@
             device location Go to Settings->Permission->enable location</string>
 
 
-    <string name= "shop_distance">%1$s miles away</string>
+    <string name="shop_distance">%1$s km away</string>
     <string name="search">Search</string>
     <string name="map_view">Map View</string>
+
+    <string name="last_seen_at">last seen at %1$s</string>
 
     <string name="userName">Default name</string>
     <string name="phone">Phone</string>
@@ -160,6 +161,13 @@
     <string name="call_text">CALL</string>
     <string name="cancel_text">CANCEL</string>
     <string name="sendlist">Send List</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="type_a_message">Type a message...</string>
+    <string name="display_name">Display name</string>
     <string name="guest_user">Guest User</string>
-    <string name="search_suggestion">Search...</string>
+    <string name="nearby_shops">Nearby Shops</string>
+    <string name="chats">Chats</string>
+    <string name="offers_shops">Offers</string>
+    <string name="main_help">Help</string>
+
 </resources>

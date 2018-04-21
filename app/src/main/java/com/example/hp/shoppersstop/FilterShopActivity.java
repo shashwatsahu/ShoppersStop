@@ -1,7 +1,9 @@
 package com.example.hp.shoppersstop;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -24,12 +26,20 @@ public class FilterShopActivity extends AppCompatActivity implements View.OnClic
     private Button cancelBtn;
     private Button addFilterBtn;
     private double range;
+    private int position;
 
 
+    public static final int FILTER_ACTIVITY_CODE = 1233;
     public static final String AUTHENTICATED = "authenticated";
     public static final String DELIVERY = "delivery available";
     public static final String EXCLUDE_CLOSE = "exclude close shops";
     public static final String RANGE = "range";
+
+    public static final String KEY_AUTH = "is_authentication checked";
+    public static final String KEY_CLOSED_SHOP = "is_closed_shop_checked";
+    public static final String KEY_DELIVERY_AVAIL = "is_delivery_available";
+
+
 
 
 
@@ -53,9 +63,27 @@ public class FilterShopActivity extends AppCompatActivity implements View.OnClic
         cancelBtn.setOnClickListener(this);
 
 
+        Intent intent = getIntent();
+        authenticateCheckBox.setChecked(intent.getBooleanExtra(AUTHENTICATED,false));
+        deliveryAvailableChkBox.setChecked(intent.getBooleanExtra(DELIVERY,false));
+        closedShopChkBox.setChecked(intent.getBooleanExtra(EXCLUDE_CLOSE,false));
+        double radius = intent.getDoubleExtra(RANGE,0.4);
+         int i =(int) Math.round(radius);
+        rangeFilterSeekBar.setProgress(i);
+
+
+
+
+
+
+
+
+
+
 
 
     }
+
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
@@ -70,7 +98,7 @@ public class FilterShopActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
-        int position = seekBar.getProgress();
+         position = seekBar.getProgress();
         range = position *(0.4);
         DecimalFormat format = new DecimalFormat("0.#");
         String rangeFormatted = format.format(range);
@@ -82,14 +110,15 @@ public class FilterShopActivity extends AppCompatActivity implements View.OnClic
     @Override
     public void onClick(View view) {
 
-        Intent dataBack = new Intent();
+        Intent dataBack = new Intent(FilterShopActivity.this,NearbyShopActivity.class);
         if(view.getId()==cancelBtn.getId())
         {
-            setResult(RESULT_CANCELED,dataBack);
-            finish();
+            dataBack.putExtra("Code",000);
+
         }else
         {
 
+            dataBack.putExtra("Code",NearbyShopActivity.NEARBYSHOP_ACTIVITY_CODE);
             if(authenticateCheckBox.isChecked())
             {
                 dataBack.putExtra(AUTHENTICATED,true);
@@ -113,8 +142,15 @@ public class FilterShopActivity extends AppCompatActivity implements View.OnClic
             }
 
             dataBack.putExtra(RANGE,range);
-            setResult(RESULT_OK,dataBack);
-            finish();
+
         }
+
+        startActivity(dataBack);
+        finish();
+
+
     }
+
+
+
 }

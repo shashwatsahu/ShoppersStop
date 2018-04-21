@@ -39,6 +39,7 @@ import com.google.firebase.database.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import static com.example.hp.shoppersstop.EnterList.uid;
 
 public class ListRecyclerView extends AppCompatActivity implements View.OnClickListener, RecyclerView.OnItemTouchListener{

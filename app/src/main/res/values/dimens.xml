@@ -17,7 +17,7 @@
     <dimen name="layout_padding">8dp</dimen>
     <dimen name="shopName_text">24sp</dimen>
     <dimen name="shopDistance_text">20sp</dimen>
-    <dimen name="shop_action_buttons">50dp</dimen>
+    <dimen name="shop_action_buttons">40dp</dimen>
     <dimen name="horizontal_margin">8dp</dimen>
     <dimen name="card_view_elevation">2dp</dimen>
     <dimen name="card_view_height">100dp</dimen>
